@@ -10,6 +10,7 @@ public class Term2Project
 {
     // instance variables - replace the example below with your own
     private boolean startMenu = true;
+    private boolean playing = false;
     
     Scanner kb = new Scanner (System.in);
     
@@ -38,6 +39,14 @@ public class Term2Project
     private int s2TP1 = 0; //ship# turn direction
     private boolean ship2P1 = false;
     private boolean ship2P1print = false;
+    //checks if a boat can move
+    private boolean canMoveS2P1L = false;
+    private boolean canMoveS2P1R = false;
+    private boolean canMoveS2P1U = false;
+    private boolean canMoveS2P1D = false;
+    private boolean canMoveS2P1T0 = false;
+    private boolean canMoveS2P1T1 = false;
+   
     
     private int s3Ab1YP1 = 0;
     private int s3Ab1XP1 = 0;
@@ -48,6 +57,15 @@ public class Term2Project
     private int s3ATP1 = 0; //ship# turn direction
     private boolean ship3AP1 = false;
     private boolean ship3AP1print = false;
+    private boolean ship3P1print = false;
+    
+    //checks if a boat can move
+    private boolean canMoveS3AP1L = false;
+    private boolean canMoveS3AP1R = false;
+    private boolean canMoveS3AP1U = false;
+    private boolean canMoveS3AP1D = false;
+    private boolean canMoveS3AP1T0 = false;
+    private boolean canMoveS3AP1T1 = false;
     
     private int s3Bb1YP1 = 0;
     private int s3Bb1XP1 = 0;
@@ -58,6 +76,13 @@ public class Term2Project
     private int s3BTP1 = 0; //ship# turn direction
     private boolean ship3BP1 = false;
     private boolean ship3BP1print = false;
+    //checks if a boat can move
+    private boolean canMoveS3BP1L = false;
+    private boolean canMoveS3BP1R = false;
+    private boolean canMoveS3BP1U = false;
+    private boolean canMoveS3BP1D = false;
+    private boolean canMoveS3BP1T0 = false;
+    private boolean canMoveS3BP1T1 = false;
     
     private int s4b1YP1 = 0;
     private int s4b1XP1 = 0;
@@ -156,6 +181,7 @@ public class Term2Project
                 ship2P1 = true;
                 setupBoardPlayer1();
                 ship2P1CMD();
+                playing = true;
             }
         }
     }
@@ -305,34 +331,35 @@ public class Term2Project
         while (ship2P1){
             String cmd0 = kb.nextLine();
             cmd0 = cmd0.toLowerCase();
-            if(cmd0.equals("right") || cmd0.equals("r")){
+            canMoveShips();
+            if(cmd0.equals("right") && canMoveS2P1R == true || cmd0.equals("r") && canMoveS2P1R == true){
                 s2b1XP1++;
                 s2b2XP1++;
                 setupBoardPlayer1();
             }
-            if(cmd0.equals("left") || cmd0.equals("l")){
+            if(cmd0.equals("left") && canMoveS2P1L == true || cmd0.equals("l") && canMoveS2P1L == true){
                 s2b1XP1--;
                 s2b2XP1--;
                 setupBoardPlayer1();
             }
-            if(cmd0.equals("up") || cmd0.equals("u")){
+            if(cmd0.equals("up") && canMoveS2P1U == true || cmd0.equals("u") && canMoveS2P1U == true){
                 s2b1YP1--;
                 s2b2YP1--;
                 setupBoardPlayer1();
             }
-            if(cmd0.equals("down") || cmd0.equals("d")){
+            if(cmd0.equals("down") && canMoveS2P1D == true || cmd0.equals("d") && canMoveS2P1D == true){
                 s2b1YP1++;
                 s2b2YP1++;
                 setupBoardPlayer1();
             }
-            if(cmd0.equals("turn") && s2TP1 == 0|| cmd0.equals("t") && s2TP1 == 0){
+            if(cmd0.equals("turn") && s2TP1 == 0 && canMoveS2P1T0  == true || cmd0.equals("t") && s2TP1 == 0 && canMoveS2P1T0  == true){
                 s2b2XP1++;
                 s2b2YP1--;
                 cmd0 = " ";
                 s2TP1 = 1;
                 setupBoardPlayer1();              
             }
-            if(cmd0.equals("turn") && s2TP1 == 1|| cmd0.equals("t") && s2TP1 == 1){
+            if(cmd0.equals("turn") && s2TP1 == 1 && canMoveS2P1T1 == true|| cmd0.equals("t") && s2TP1 == 1 && canMoveS2P1T1 == true){
                 s2b2XP1--;
                 s2b2YP1++;
                 cmd0 = " ";
@@ -352,31 +379,32 @@ public class Term2Project
         while (ship3AP1){
             String cmd1 = kb.nextLine();
             cmd1 = cmd1.toLowerCase();
-            if(cmd1.equals("right") || cmd1.equals("r")){
+            canMoveShips();
+            if(cmd1.equals("right") && canMoveS3AP1R == true|| cmd1.equals("r") && canMoveS3AP1R == true){
                 s3Ab1XP1++;
                 s3Ab2XP1++;
                 s3Ab3XP1++;
                 setupBoardPlayer1();
             }
-            if(cmd1.equals("left") || cmd1.equals("l")){
+            if(cmd1.equals("left") && canMoveS3AP1L == true || cmd1.equals("l") && canMoveS3AP1L == true){
                 s3Ab1XP1--;
                 s3Ab2XP1--;
                 s3Ab3XP1--;
                 setupBoardPlayer1();
             }
-            if(cmd1.equals("up") || cmd1.equals("u")){
+            if(cmd1.equals("up") && canMoveS3AP1U == true || cmd1.equals("u") && canMoveS3AP1U == true){
                 s3Ab1YP1--;
                 s3Ab2YP1--;
                 s3Ab3YP1--;
                 setupBoardPlayer1();
             }
-            if(cmd1.equals("down") || cmd1.equals("d")){
+            if(cmd1.equals("down") && canMoveS3AP1D == true || cmd1.equals("d") && canMoveS3AP1D == true){
                 s3Ab1YP1++;
                 s3Ab2YP1++;
                 s3Ab3YP1++;
                 setupBoardPlayer1();
             }
-            if(cmd1.equals("turn") && s3ATP1 == 0|| cmd1.equals("t") && s3ATP1 == 0){
+            if(cmd1.equals("turn") && s3ATP1 == 0  && canMoveS3AP1T0 == true || cmd1.equals("t") && s3ATP1 == 0 && canMoveS3AP1T0 == true){
                 s3Ab2XP1++;
                 s3Ab2YP1--;
                 
@@ -387,7 +415,7 @@ public class Term2Project
                 s3ATP1 = 1;
                 setupBoardPlayer1();              
             }
-            if(cmd1.equals("turn") && s3ATP1 == 1|| cmd1.equals("t") && s3ATP1 == 1){
+            if(cmd1.equals("turn") && s3ATP1 == 1 && canMoveS3AP1T0 == true|| cmd1.equals("t") && s3ATP1 == 1 && canMoveS3AP1T0 == true){
                 s3Ab2XP1--;
                 s3Ab2YP1++;
                 
@@ -925,7 +953,44 @@ public class Term2Project
             }
         }
     }
-    public boolean canTurnRight(boolean canR){
-        return canR;
+    public void canMoveShips(){
+        if (s2b1XP1 - 1 <= -1)canMoveS2P1L = false;
+        else canMoveS2P1L = true;
+        if (s2b2XP1 + 1 >= 10)canMoveS2P1R = false;
+        else canMoveS2P1R = true;
+        if (s2b1YP1 - 1 <= -1)canMoveS2P1U = false;
+        else canMoveS2P1U = true;
+        if (s2b2YP1 + 1 >= 10)canMoveS2P1D = false;
+        else canMoveS2P1D = true;
+        if (s2b2XP1 + 1 >= 10)canMoveS2P1T0 = false;
+        else canMoveS2P1T0 = true;
+        if (s2b2YP1 + 1 >= 10)canMoveS2P1T1 = false;
+        else canMoveS2P1T1 = true;
+        
+        if (s3Ab1XP1 - 1 <= -1)canMoveS3AP1L = false;
+        else canMoveS3AP1L = true;
+        if (s3Ab3XP1 + 1 >= 10)canMoveS3AP1R = false;
+        else canMoveS3AP1R = true;
+        if (s3Ab1YP1 - 1 <= -1)canMoveS3AP1U = false;
+        else canMoveS3AP1U = true;
+        if (s3Ab3YP1 + 1 >= 10)canMoveS3AP1D = false;
+        else canMoveS3AP1D = true;
+        if (s3Ab3XP1 + 2 >= 10)canMoveS3AP1T0 = false;
+        else canMoveS3AP1T0 = true;
+        if (s3Ab3YP1 + 2 >= 10)canMoveS3AP1T1 = false;
+        else canMoveS3AP1T1 = true;
+        
+        if (s3Bb1XP1 - 1 <= -1)canMoveS3BP1L = false;
+        else canMoveS3BP1L = true;
+        if (s3Bb3XP1 + 1 >= 10)canMoveS3BP1R = false;
+        else canMoveS3BP1R = true;
+        if (s3Bb1YP1 - 1 <= -1)canMoveS3BP1U = false;
+        else canMoveS3BP1U = true;
+        if (s3Bb3YP1 + 1 >= 10)canMoveS3BP1D = false;
+        else canMoveS3BP1D = true;
+        if (s3Bb3XP1 + 2 >= 10)canMoveS3BP1T0 = false;
+        else canMoveS3BP1T0 = true;
+        if (s3Bb3YP1 + 2 >= 10)canMoveS3BP1T1 = false;
+        else canMoveS3BP1T1 = true;
     }
 }
