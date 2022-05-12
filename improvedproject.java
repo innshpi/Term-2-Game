@@ -32,8 +32,20 @@ public class improvedproject
     
     // player 1 ships
     // ship# | block# | player#
-    int[] shipPosX = {0, 0, 0, 0, 0};
-    int[] shipPosY = {0, 1, 2, 3, 4};
+    int[] shipPos2X = {0, 0};
+    int[] shipPos2Y = {0, 1};
+    
+    int[] shipPos3AX = {0, 0, 0};
+    int[] shipPos3AY = {0, 1, 2};
+    
+    int[] shipPos3BX = {0, 0, 0};
+    int[] shipPos3BY = {0, 1, 2};
+    
+    int[] shipPos4X = {0, 0, 0, 0};
+    int[] shipPos4Y = {0, 1, 2, 3};
+    
+    int[] shipPos5X = {0, 0, 0, 0, 0};
+    int[] shipPos5Y = {0, 1, 2, 3, 4};
     
     private int s2TP1 = 0; //ship# turn direction
     private int s3ATP1 = 0; //ship# turn direction
@@ -51,7 +63,7 @@ public class improvedproject
     private boolean ship2P1print = false;
     
     private boolean ship3AP1 = false;
-    private boolean ship3P1print = false;
+    private boolean ship3AP1print = false;
     
     private boolean ship3BP1 = false;
     private boolean ship3BP1print = false;
@@ -178,58 +190,58 @@ public class improvedproject
             for(int j=0;j<ROWS;j++){
                 setupBoardPlayer1[i][j] = o;
                 if(ship2P1){
-                    setupBoardPlayer1[]shipPosX[]] = ship;
-                    setupBoardPlayer1[][shipPosX[]] = ship;
+                    setupBoardPlayer1[shipPos2Y[0]][shipPos2X[0]] = ship;
+                    setupBoardPlayer1[shipPos2Y[1]][shipPos2X[1]] = ship;
                 }
                 if(ship2P1print){
-                    setupBoardPlayer1[][shipPosX[]] = ship2Final;
-                    setupBoardPlayer1[][shipPosX[]] = ship2Final;
+                    setupBoardPlayer1[shipPos2Y[0]][shipPos2X[0]] = ship2Final;
+                    setupBoardPlayer1[shipPos2Y[1]][shipPos2X[1]] = ship2Final;
                 }
                 if(ship3AP1){
-                    setupBoardPlayer1[][shipPosX[]] = ship;
-                    setupBoardPlayer1[s3Ab2YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s3Ab3YP1][shipPosX[]] = ship;
+                    setupBoardPlayer1[shipPos3AY[0]][shipPos3AX[0]] = ship;
+                    setupBoardPlayer1[shipPos3AY[1]][shipPos3AX[1]] = ship;
+                    setupBoardPlayer1[shipPos3AY[2]][shipPos3AX[2]] = ship;
                 }
                 if(ship3AP1print){
-                    setupBoardPlayer1[s3Ab1YP1][shipPosX[]] = ship3AFinal;
-                    setupBoardPlayer1[s3Ab2YP1][shipPosX[]] = ship3AFinal;
-                    setupBoardPlayer1[s3Ab3YP1][shipPosX[]] = ship3AFinal;
+                    setupBoardPlayer1[shipPos3AY[0]][shipPos3AX[0]] = ship3AFinal;
+                    setupBoardPlayer1[shipPos3AY[1]][shipPos3AX[1]] = ship3AFinal;
+                    setupBoardPlayer1[shipPos3AY[2]][shipPos3AX[2]] = ship3AFinal;
                 }
                 if(ship3BP1){
-                    setupBoardPlayer1[s3Bb1YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s3Bb2YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s3Bb3YP1][shipPosX[]] = ship;
+                    setupBoardPlayer1[shipPos3BY[0]][shipPos3BX[0]] = ship;
+                    setupBoardPlayer1[shipPos3BY[1]][shipPos3BX[1]] = ship;
+                    setupBoardPlayer1[shipPos3BY[2]][shipPos3BX[2]] = ship;
                 }
                 if(ship3BP1print){
-                    setupBoardPlayer1[s3Bb1YP1][shipPosX[]] = ship3BFinal;
-                    setupBoardPlayer1[s3Bb2YP1][shipPosX[]] = ship3BFinal;
-                    setupBoardPlayer1[s3Bb3YP1][shipPosX[]] = ship3BFinal;
+                    setupBoardPlayer1[shipPos3BY[0]][shipPos3BX[0]] = ship3BFinal;
+                    setupBoardPlayer1[shipPos3BY[1]][shipPos3BX[1]] = ship3BFinal;
+                    setupBoardPlayer1[shipPos3BY[2]][shipPos3BX[2]] = ship3BFinal;
                 }
                 if(ship4P1){    
-                    setupBoardPlayer1[s4b1YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s4b2YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s4b3YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s4b4YP1][shipPosX[]] = ship;
+                    setupBoardPlayer1[shipPos4Y[0]][shipPos4X[0]] = ship;
+                    setupBoardPlayer1[shipPos4Y[1]][shipPos4X[1]] = ship;
+                    setupBoardPlayer1[shipPos4Y[2]][shipPos4X[2]] = ship;
+                    setupBoardPlayer1[shipPos4Y[3]][shipPos4X[3]] = ship;
                 }
                 if(ship4P1print){
-                    setupBoardPlayer1[s4b1YP1][shipPosX[]] = ship4Final;
-                    setupBoardPlayer1[s4b2YP1][shipPosX[]] = ship4Final;
-                    setupBoardPlayer1[s4b3YP1][shipPosX[]] = ship4Final;
-                    setupBoardPlayer1[s4b4YP1][shipPosX[]] = ship4Final;
+                    setupBoardPlayer1[shipPos4Y[0]][shipPos4X[0]] = ship4Final;
+                    setupBoardPlayer1[shipPos4Y[1]][shipPos4X[1]] = ship4Final;
+                    setupBoardPlayer1[shipPos4Y[2]][shipPos4X[2]] = ship4Final;
+                    setupBoardPlayer1[shipPos4Y[3]][shipPos4X[3]] = ship4Final;
                 }
                 if(ship5P1){     
-                    setupBoardPlayer1[s5b1YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s5b2YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s5b3YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s5b4YP1][shipPosX[]] = ship;
-                    setupBoardPlayer1[s5b5YP1][shipPosX[]] = ship;
+                    setupBoardPlayer1[shipPos5Y[0]][shipPos5X[0]] = ship;
+                    setupBoardPlayer1[shipPos5Y[1]][shipPos5X[1]] = ship;
+                    setupBoardPlayer1[shipPos5Y[2]][shipPos5X[2]] = ship;
+                    setupBoardPlayer1[shipPos5Y[3]][shipPos5X[3]] = ship;
+                    setupBoardPlayer1[shipPos5Y[4]][shipPos5X[4]] = ship;
                 }
                 if(ship5P1print){
-                    setupBoardPlayer1[s5b1YP1][s5b1XP1] = ship5Final;
-                    setupBoardPlayer1[s5b2YP1][s5b2XP1] = ship5Final;
-                    setupBoardPlayer1[s5b3YP1][s5b3XP1] = ship5Final;
-                    setupBoardPlayer1[s5b4YP1][s5b4XP1] = ship5Final;
-                    setupBoardPlayer1[s5b5YP1][s5b5XP1] = ship5Final;
+                    setupBoardPlayer1[shipPos5Y[0]][shipPos5X[0]] = ship5Final;
+                    setupBoardPlayer1[shipPos5Y[1]][shipPos5X[1]] = ship5Final;
+                    setupBoardPlayer1[shipPos5Y[2]][shipPos5X[2]] = ship5Final;
+                    setupBoardPlayer1[shipPos5Y[3]][shipPos5X[3]] = ship5Final;
+                    setupBoardPlayer1[shipPos5Y[4]][shipPos5X[4]] = ship5Final;
                 }
                 System.out.print(setupBoardPlayer1[i][j]);
             }
@@ -249,58 +261,58 @@ public class improvedproject
             for(int j=0;j<ROWS;j++){
                 setupBoardPlayer2[i][j] = o;
                 if(ship2P2){
-                    setupBoardPlayer2[s2b1YP2][s2b1XP2] = ship;
-                    setupBoardPlayer2[s2b2YP2][s2b2XP2] = ship;
+                    setupBoardPlayer2[shipPos2Y[0]][shipPos2X[0]] = ship;
+                    setupBoardPlayer2[shipPos2Y[1]][shipPos2X[1]] = ship;
                 }
                 if(ship2P2print){
-                    setupBoardPlayer2[s2b1YP2][s2b1XP2] = ship2Final;
-                    setupBoardPlayer2[s2b2YP2][s2b2XP2] = ship2Final;
+                    setupBoardPlayer2[shipPos2Y[0]][shipPos2X[0]] = ship2Final;
+                    setupBoardPlayer2[shipPos2Y[1]][shipPos2X[1]] = ship2Final;
                 }
                 if(ship3AP2){
-                    setupBoardPlayer2[s3Ab1YP2][s3Ab1XP2] = ship;
-                    setupBoardPlayer2[s3Ab2YP2][s3Ab2XP2] = ship;
-                    setupBoardPlayer2[s3Ab3YP2][s3Ab3XP2] = ship;
+                    setupBoardPlayer2[shipPos3AY[0]][shipPos3AX[0]] = ship;
+                    setupBoardPlayer2[shipPos3AY[1]][shipPos3AX[1]] = ship;
+                    setupBoardPlayer2[shipPos3AY[2]][shipPos3AX[2]] = ship;
                 }
                 if(ship3AP2print){
-                    setupBoardPlayer2[s3Ab1YP2][s3Ab1XP2] = ship3AFinal;
-                    setupBoardPlayer2[s3Ab2YP2][s3Ab2XP2] = ship3AFinal;
-                    setupBoardPlayer2[s3Ab3YP2][s3Ab3XP2] = ship3AFinal;
+                    setupBoardPlayer2[shipPos3AY[0]][shipPos3AX[0]] = ship3AFinal;
+                    setupBoardPlayer2[shipPos3AY[1]][shipPos3AX[1]] = ship3AFinal;
+                    setupBoardPlayer2[shipPos3AY[2]][shipPos3AX[2]] = ship3AFinal;
                 }
                 if(ship3BP2){
-                    setupBoardPlayer2[s3Bb1YP2][s3Bb1XP2] = ship;
-                    setupBoardPlayer2[s3Bb2YP2][s3Bb2XP2] = ship;
-                    setupBoardPlayer2[s3Bb3YP2][s3Bb3XP2] = ship;
+                    setupBoardPlayer2[shipPos3BY[0]][shipPos3BX[0]] = ship;
+                    setupBoardPlayer2[shipPos3BY[1]][shipPos3BX[1]] = ship;
+                    setupBoardPlayer2[shipPos3BY[2]][shipPos3BX[2]] = ship;
                 }
                 if(ship3BP2print){
-                    setupBoardPlayer2[s3Bb1YP2][s3Bb1XP2] = ship3BFinal;
-                    setupBoardPlayer2[s3Bb2YP2][s3Bb2XP2] = ship3BFinal;
-                    setupBoardPlayer2[s3Bb3YP2][s3Bb3XP2] = ship3BFinal;
+                    setupBoardPlayer2[shipPos3BY[0]][shipPos3BX[0]] = ship3BFinal;
+                    setupBoardPlayer2[shipPos3BY[1]][shipPos3BX[1]] = ship3BFinal;
+                    setupBoardPlayer2[shipPos3BY[2]][shipPos3BX[2]] = ship3BFinal;
                 }
                 if(ship4P2){    
-                    setupBoardPlayer2[s4b1YP2][s4b1XP2] = ship;
-                    setupBoardPlayer2[s4b2YP2][s4b2XP2] = ship;
-                    setupBoardPlayer2[s4b3YP2][s4b3XP2] = ship;
-                    setupBoardPlayer2[s4b4YP2][s4b4XP2] = ship;
+                    setupBoardPlayer2[shipPos4Y[0]][shipPos4X[0]] = ship;
+                    setupBoardPlayer2[shipPos4Y[1]][shipPos4X[1]] = ship;
+                    setupBoardPlayer2[shipPos4Y[2]][shipPos4X[2]] = ship;
+                    setupBoardPlayer2[shipPos4Y[3]][shipPos4X[3]] = ship;
                 }
                 if(ship4P2print){
-                    setupBoardPlayer2[s4b1YP2][s4b1XP2] = ship4Final;
-                    setupBoardPlayer2[s4b2YP2][s4b2XP2] = ship4Final;
-                    setupBoardPlayer2[s4b3YP2][s4b3XP2] = ship4Final;
-                    setupBoardPlayer2[s4b4YP2][s4b4XP2] = ship4Final;
+                    setupBoardPlayer2[shipPos4Y[0]][shipPos4X[0]] = ship4Final;
+                    setupBoardPlayer2[shipPos4Y[1]][shipPos4X[1]] = ship4Final;
+                    setupBoardPlayer2[shipPos4Y[2]][shipPos4X[2]] = ship4Final;
+                    setupBoardPlayer2[shipPos4Y[3]][shipPos4X[3]] = ship4Final;
                 }
                 if(ship5P2){     
-                    setupBoardPlayer2[s5b1YP2][s5b1XP2] = ship;
-                    setupBoardPlayer2[s5b2YP2][s5b2XP2] = ship;
-                    setupBoardPlayer2[s5b3YP2][s5b3XP2] = ship;
-                    setupBoardPlayer2[s5b4YP2][s5b4XP2] = ship;
-                    setupBoardPlayer2[s5b5YP2][s5b5XP2] = ship;
+                    setupBoardPlayer2[shipPos5Y[0]][shipPos5X[0]] = ship;
+                    setupBoardPlayer2[shipPos5Y[1]][shipPos5X[1]] = ship;
+                    setupBoardPlayer2[shipPos5Y[2]][shipPos5X[2]] = ship;
+                    setupBoardPlayer2[shipPos5Y[3]][shipPos5X[3]] = ship;
+                    setupBoardPlayer2[shipPos5Y[4]][shipPos5X[4]] = ship;
                 }
                 if(ship5P2print){
-                    setupBoardPlayer2[s5b1YP2][s5b1XP2] = ship5Final;
-                    setupBoardPlayer2[s5b2YP2][s5b2XP2] = ship5Final;
-                    setupBoardPlayer2[s5b3YP2][s5b3XP2] = ship5Final;
-                    setupBoardPlayer2[s5b4YP2][s5b4XP2] = ship5Final;
-                    setupBoardPlayer2[s5b5YP2][s5b5XP2] = ship5Final;
+                    setupBoardPlayer2[shipPos5Y[0]][shipPos5X[0]] = ship5Final;
+                    setupBoardPlayer2[shipPos5Y[1]][shipPos5X[1]] = ship5Final;
+                    setupBoardPlayer2[shipPos5Y[2]][shipPos5X[2]] = ship5Final;
+                    setupBoardPlayer2[shipPos5Y[3]][shipPos5X[3]] = ship5Final;
+                    setupBoardPlayer2[shipPos5Y[4]][shipPos5X[4]] = ship5Final;
                 }
                 System.out.print(setupBoardPlayer2[i][j]);
             }
@@ -316,35 +328,35 @@ public class improvedproject
             cmd0 = cmd0.toLowerCase();
             canMoveShips();
             if(cmd0.equals("right") && canMoveS2P1R == true || cmd0.equals("r") && canMoveS2P1R == true){
-                s2b1XP1++;
-                s2b2XP1++;
+                shipPos2X[0]++;
+                shipPos2X[1]++;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("left") && canMoveS2P1L == true || cmd0.equals("l") && canMoveS2P1L == true){
-                s2b1XP1--;
-                s2b2XP1--;
+                shipPos2X[0]--;
+                shipPos2X[1]--;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("up") && canMoveS2P1U == true || cmd0.equals("u") && canMoveS2P1U == true){
-                s2b1YP1--;
-                s2b2YP1--;
+                shipPos2Y[0]--;
+                shipPos2Y[1]--;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("down") && canMoveS2P1D == true || cmd0.equals("d") && canMoveS2P1D == true){
-                s2b1YP1++;
-                s2b2YP1++;
+                shipPos2Y[0]++;
+                shipPos2Y[1]++;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("turn") && s2TP1 == 0 && canMoveS2P1T0  == true || cmd0.equals("t") && s2TP1 == 0 && canMoveS2P1T0  == true){
-                s2b2XP1++;
-                s2b2YP1--;
+                shipPos2X[1]++;
+                shipPos2Y[1]--;
                 cmd0 = " ";
                 s2TP1 = 1;
                 setupBoardPlayer1();              
             }
             if(cmd0.equals("turn") && s2TP1 == 1 && canMoveS2P1T1 == true|| cmd0.equals("t") && s2TP1 == 1 && canMoveS2P1T1 == true){
-                s2b2XP1--;
-                s2b2YP1++;
+                shipPos2X[1]--;
+                shipPos2Y[1]++;
                 cmd0 = " ";
                 s2TP1 = 0;
                 setupBoardPlayer1();
@@ -364,46 +376,46 @@ public class improvedproject
             cmd1 = cmd1.toLowerCase();
             canMoveShips();
             if(cmd1.equals("right") && canMoveS3AP1R == true|| cmd1.equals("r") && canMoveS3AP1R == true){
-                s3Ab1XP1++;
-                s3Ab2XP1++;
-                s3Ab3XP1++;
+                shipPos3AX[0]++;
+                shipPos3AX[1]++;
+                shipPos3AX[2]++;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("left") && canMoveS3AP1L == true || cmd1.equals("l") && canMoveS3AP1L == true){
-                s3Ab1XP1--;
-                s3Ab2XP1--;
-                s3Ab3XP1--;
+                shipPos3AX[0]--;
+                shipPos3AX[1]--;
+                shipPos3AX[2]--;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("up") && canMoveS3AP1U == true || cmd1.equals("u") && canMoveS3AP1U == true){
-                s3Ab1YP1--;
-                s3Ab2YP1--;
-                s3Ab3YP1--;
+                shipPos3AY[0]--;
+                shipPos3AY[1]--;
+                shipPos3AY[2]--;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("down") && canMoveS3AP1D == true || cmd1.equals("d") && canMoveS3AP1D == true){
-                s3Ab1YP1++;
-                s3Ab2YP1++;
-                s3Ab3YP1++;
+                shipPos3AY[0]++;
+                shipPos3AY[1]++;
+                shipPos3AY[2]++;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("turn") && s3ATP1 == 0  && canMoveS3AP1T0 == true || cmd1.equals("t") && s3ATP1 == 0 && canMoveS3AP1T0 == true){
-                s3Ab2XP1++;
-                s3Ab2YP1--;
+                shipPos3AX[1]++;
+                shipPos3AY[1]--;
                 
-                s3Ab3XP1 += 2;
-                s3Ab3YP1 -= 2;
+                shipPos3AX[2] += 2;
+                shipPos3AY[2] -= 2;
                 
                 cmd1 = " ";
                 s3ATP1 = 1;
                 setupBoardPlayer1();              
             }
             if(cmd1.equals("turn") && s3ATP1 == 1 && canMoveS3AP1T0 == true|| cmd1.equals("t") && s3ATP1 == 1 && canMoveS3AP1T0 == true){
-                s3Ab2XP1--;
-                s3Ab2YP1++;
+                shipPos3AX[1]--;
+                shipPos3AY[1]++;
                 
-                s3Ab3XP1 -= 2;
-                s3Ab3YP1 += 2;
+                shipPos3AX[2] -= 2;
+                shipPos3AY[2] += 2;
                 
                 cmd1 = " ";
                 s3ATP1 = 0;
@@ -423,46 +435,46 @@ public class improvedproject
             String cmd2 = kb.nextLine();
             cmd2 = cmd2.toLowerCase();
             if(cmd2.equals("right") || cmd2.equals("r")){
-                s3Bb1XP1++;
-                s3Bb2XP1++;
-                s3Bb3XP1++;
+                shipPos3BX[0]++;
+                shipPos3BX[1]++;
+                shipPos3BX[2]++;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("left") || cmd2.equals("l")){
-                s3Bb1XP1--;
-                s3Bb2XP1--;
-                s3Bb3XP1--;
+                shipPos3BX[0]--;
+                shipPos3BX[1]--;
+                shipPos3BX[2]--;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("up") || cmd2.equals("u")){
-                s3Bb1YP1--;
-                s3Bb2YP1--;
-                s3Bb3YP1--;
+                shipPos3BY[0]--;
+                shipPos3BY[1]--;
+                shipPos3BY[2]--;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("down") || cmd2.equals("d")){
-                s3Bb1YP1++;
-                s3Bb2YP1++;
-                s3Bb3YP1++;
+                shipPos3BY[0]++;
+                shipPos3BY[1]++;
+                shipPos3BY[2]++;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("turn") && s3BTP1 == 0|| cmd2.equals("t") && s3BTP1 == 0){
-                s3Bb2XP1++;
-                s3Bb2YP1--;
+                shipPos3BX[1]++;
+                shipPos3BY[1]--;
                 
-                s3Bb3XP1 += 2;
-                s3Bb3YP1 -= 2;
+                shipPos3BX[2] += 2;
+                shipPos3BY[2] -= 2;
                 
                 cmd2 = " ";
                 s3BTP1 = 1;
                 setupBoardPlayer1();              
             }
             if(cmd2.equals("turn") && s3BTP1 == 1|| cmd2.equals("t") && s3BTP1 == 1){
-                s3Bb2XP1--; 
-                s3Bb2YP1++;
+                shipPos3BX[1]--; 
+                shipPos3BY[1]++;
                 
-                s3Bb3XP1 -= 2;
-                s3Bb3YP1 += 2;
+                shipPos3BX[2] -= 2;
+                shipPos3BY[2] += 2;
                 
                 cmd2 = " ";
                 s3BTP1 = 0;
@@ -620,8 +632,8 @@ public class improvedproject
                 ship5P1 = false;
                 ship5P1print = true;
                 ship2P2 = true;
-                setupBoardPlayer2();
-                ship2P2CMD();
+                setupBoardPlayer1();
+                //ship2P2CMD();
             }
         }
     }
