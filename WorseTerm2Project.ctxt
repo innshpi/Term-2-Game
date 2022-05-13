@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=improvedproject
+comment0.target=WorseTerm2Project
 comment1.params=
-comment1.target=improvedproject()
+comment1.target=WorseTerm2Project()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ arrays\r\n
 comment10.params=
 comment10.target=void\ ship3AP2CMD()

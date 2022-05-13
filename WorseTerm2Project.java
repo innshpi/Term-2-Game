@@ -1,12 +1,12 @@
 /**
- * Write a description of class improvedproject here.
+ * Write a description of class WorseTerm2Project here.
  *
  * @author (Piper Inns Hall)
  * @version (06/05/22)
  */
 
 import java.util.Scanner;
-public class improvedproject
+public class WorseTerm2Project
 {
     // instance variables - replace the example below with your own
     private boolean startMenu = true;
@@ -32,71 +32,34 @@ public class improvedproject
     
     // player 1 ships
     // ship# | block# | player#
-    int[] shipPos2X = {0, 0};
-    int[] shipPos2Y = {0, 1};
-    
-    int[] shipPos3AX = {0, 0, 0};
-    int[] shipPos3AY = {0, 1, 2};
-    
-    int[] shipPos3BX = {0, 0, 0};
-    int[] shipPos3BY = {0, 1, 2};
-    
-    int[] shipPos4X = {0, 0, 0, 0};
-    int[] shipPos4Y = {0, 1, 2, 3};
-    
-    int[] shipPos5X = {0, 0, 0, 0, 0};
-    int[] shipPos5Y = {0, 1, 2, 3, 4};
-    
+    private int s2b1YP1 = 0;
+    private int s2b1XP1 = 0;
+    private int s2b2YP1 = 1;
+    private int s2b2XP1 = 0;
     private int s2TP1 = 0; //ship# turn direction
-    private int s3ATP1 = 0; //ship# turn direction
-    private int s3BTP1 = 0; //ship# turn direction
-    private int s4TP1 = 0; //ship# turn direction
-    private int s5TP1 = 0; //ship# turn direction
-    private int s2TP2 = 0; //ship# turn direction
-    private int s3ATP2 = 0; //ship# turn direction    
-    private int s3BTP2 = 0; //ship# turn direction
-    private int s4TP2 = 0; //ship# turn direction
-    private int s5TP2 = 0; //ship# turn direction
-    
-    // Tells each ship if it can move or print on the board
     private boolean ship2P1 = false;
     private boolean ship2P1print = false;
-    
-    private boolean ship3AP1 = false;
-    private boolean ship3AP1print = false;
-    
-    private boolean ship3BP1 = false;
-    private boolean ship3BP1print = false;
-    
-    private boolean ship4P1 = false;
-    private boolean ship4P1print = false;
-    
-    private boolean ship5P1 = false;
-    private boolean ship5P1print = false;
-    
-    private boolean ship2P2 = false;
-    private boolean ship2P2print = false;
-    
-    private boolean ship3AP2 = false;
-    private boolean ship3AP2print = false;
-    
-    private boolean ship3BP2 = false;
-    private boolean ship3BP2print = false;
-    
-    private boolean ship4P2 = false;
-    private boolean ship4P2print = false;
-    
-    private boolean ship5P2 = false;
-    private boolean ship5P2print = false;
-    
-    //checks if a boat can move in a certain direction (player 1)
+    //checks if a boat can move
     private boolean canMoveS2P1L = false;
     private boolean canMoveS2P1R = false;
     private boolean canMoveS2P1U = false;
     private boolean canMoveS2P1D = false;
     private boolean canMoveS2P1T0 = false;
     private boolean canMoveS2P1T1 = false;
+   
     
+    private int s3Ab1YP1 = 0;
+    private int s3Ab1XP1 = 0;
+    private int s3Ab2YP1 = 1;
+    private int s3Ab2XP1 = 0;
+    private int s3Ab3YP1 = 2;
+    private int s3Ab3XP1 = 0;
+    private int s3ATP1 = 0; //ship# turn direction
+    private boolean ship3AP1 = false;
+    private boolean ship3AP1print = false;
+    private boolean ship3P1print = false;
+    
+    //checks if a boat can move
     private boolean canMoveS3AP1L = false;
     private boolean canMoveS3AP1R = false;
     private boolean canMoveS3AP1U = false;
@@ -104,6 +67,16 @@ public class improvedproject
     private boolean canMoveS3AP1T0 = false;
     private boolean canMoveS3AP1T1 = false;
     
+    private int s3Bb1YP1 = 0;
+    private int s3Bb1XP1 = 0;
+    private int s3Bb2YP1 = 1;
+    private int s3Bb2XP1 = 0;
+    private int s3Bb3YP1 = 2;
+    private int s3Bb3XP1 = 0;
+    private int s3BTP1 = 0; //ship# turn direction
+    private boolean ship3BP1 = false;
+    private boolean ship3BP1print = false;
+    //checks if a boat can move
     private boolean canMoveS3BP1L = false;
     private boolean canMoveS3BP1R = false;
     private boolean canMoveS3BP1U = false;
@@ -111,60 +84,92 @@ public class improvedproject
     private boolean canMoveS3BP1T0 = false;
     private boolean canMoveS3BP1T1 = false;
     
-    private boolean canMoveS4P1L = false;
-    private boolean canMoveS4P1R = false;
-    private boolean canMoveS4P1U = false;
-    private boolean canMoveS4P1D = false;
-    private boolean canMoveS4P1T0 = false;
-    private boolean canMoveS4P1T1 = false;
+    private int s4b1YP1 = 0;
+    private int s4b1XP1 = 0;
+    private int s4b2YP1 = 1;
+    private int s4b2XP1 = 0;
+    private int s4b3YP1 = 2;
+    private int s4b3XP1 = 0;
+    private int s4b4YP1 = 3;
+    private int s4b4XP1 = 0;
+    private int s4TP1 = 0; //ship# turn direction
+    private boolean ship4P1 = false;
+    private boolean ship4P1print = false;
     
-    private boolean canMoveS5P1L = false;
-    private boolean canMoveS5P1R = false;
-    private boolean canMoveS5P1U = false;
-    private boolean canMoveS5P1D = false;
-    private boolean canMoveS5P1T0 = false;
-    private boolean canMoveS5P1T1 = false;
+    private int s5b1YP1 = 0;
+    private int s5b1XP1 = 0;
+    private int s5b2YP1 = 1;
+    private int s5b2XP1 = 0;
+    private int s5b3YP1 = 2;
+    private int s5b3XP1 = 0;
+    private int s5b4YP1 = 3;
+    private int s5b4XP1 = 0;
+    private int s5b5YP1 = 4;
+    private int s5b5XP1 = 0;
+    private int s5TP1 = 0; //ship# turn direction
+    private boolean ship5P1 = false;
+    private boolean ship5P1print = false;
     
-    //checks if a boat can move in a certain direction (player 2)
-    private boolean canMoveS2P2L = false;
-    private boolean canMoveS2P2R = false;
-    private boolean canMoveS2P2U = false;
-    private boolean canMoveS2P2D = false;
-    private boolean canMoveS2P2T0 = false;
-    private boolean canMoveS2P2T1 = false;
-   
-    private boolean canMoveS3AP2L = false;
-    private boolean canMoveS3AP2R = false;
-    private boolean canMoveS3AP2U = false;
-    private boolean canMoveS3AP2D = false;
-    private boolean canMoveS3AP2T0 = false;
-    private boolean canMoveS3AP2T1 = false;
+    // player 2 ships
+    // ship# | block# | player#
+    private int s2b1YP2 = 0;
+    private int s2b1XP2 = 0;
+    private int s2b2YP2 = 1;
+    private int s2b2XP2 = 0;
+    private int s2TP2 = 0; //ship# turn direction
+    private boolean ship2P2 = false;
+    private boolean ship2P2print = false;
     
-    private boolean canMoveS3BP2L = false;
-    private boolean canMoveS3BP2R = false;
-    private boolean canMoveS3BP2U = false;
-    private boolean canMoveS3BP2D = false;
-    private boolean canMoveS3BP2T0 = false;
-    private boolean canMoveS3BP2T1 = false;
+    private int s3Ab1YP2 = 0;
+    private int s3Ab1XP2 = 0;
+    private int s3Ab2YP2 = 1;
+    private int s3Ab2XP2 = 0;
+    private int s3Ab3YP2 = 2;
+    private int s3Ab3XP2 = 0;
+    private int s3ATP2 = 0; //ship# turn direction
+    private boolean ship3AP2 = false;
+    private boolean ship3AP2print = false;
     
-    private boolean canMoveS4P2L = false;
-    private boolean canMoveS4P2R = false;
-    private boolean canMoveS4P2U = false;
-    private boolean canMoveS4P2D = false;
-    private boolean canMoveS4P2T0 = false;
-    private boolean canMoveS4P2T1 = false;
+    private int s3Bb1YP2 = 0;
+    private int s3Bb1XP2 = 0;
+    private int s3Bb2YP2 = 1;
+    private int s3Bb2XP2 = 0;
+    private int s3Bb3YP2 = 2;
+    private int s3Bb3XP2 = 0;
+    private int s3BTP2 = 0; //ship# turn direction
+    private boolean ship3BP2 = false;
+    private boolean ship3BP2print = false;
     
-    private boolean canMoveS5P2L = false;
-    private boolean canMoveS5P2R = false;
-    private boolean canMoveS5P2U = false;
-    private boolean canMoveS5P2D = false;
-    private boolean canMoveS5P2T0 = false;
-    private boolean canMoveS5P2T1 = false;
+    private int s4b1YP2 = 0;
+    private int s4b1XP2 = 0;
+    private int s4b2YP2 = 1;
+    private int s4b2XP2 = 0;
+    private int s4b3YP2 = 2;
+    private int s4b3XP2 = 0;
+    private int s4b4YP2 = 3;
+    private int s4b4XP2 = 0;
+    private int s4TP2 = 0; //ship# turn direction
+    private boolean ship4P2 = false;
+    private boolean ship4P2print = false;
+    
+    private int s5b1YP2 = 0;
+    private int s5b1XP2 = 0;
+    private int s5b2YP2 = 1;
+    private int s5b2XP2 = 0;
+    private int s5b3YP2 = 2;
+    private int s5b3XP2 = 0;
+    private int s5b4YP2 = 3;
+    private int s5b4XP2 = 0;
+    private int s5b5YP2 = 4;
+    private int s5b5XP2 = 0;
+    private int s5TP2 = 0; //ship# turn direction
+    private boolean ship5P2 = false;
+    private boolean ship5P2print = false;
     
     /**
      * Constructor for objects of class arrays
      */
-    public improvedproject()
+    public WorseTerm2Project()
     {
         setupBoardPlayer1();
         System.out.println("Welcome to battleship.\nType 's' or 'start' to start the game");
@@ -190,58 +195,58 @@ public class improvedproject
             for(int j=0;j<ROWS;j++){
                 setupBoardPlayer1[i][j] = o;
                 if(ship2P1){
-                    setupBoardPlayer1[shipPos2Y[0]][shipPos2X[0]] = ship;
-                    setupBoardPlayer1[shipPos2Y[1]][shipPos2X[1]] = ship;
+                    setupBoardPlayer1[s2b1YP1][s2b1XP1] = ship;
+                    setupBoardPlayer1[s2b2YP1][s2b2XP1] = ship;
                 }
                 if(ship2P1print){
-                    setupBoardPlayer1[shipPos2Y[0]][shipPos2X[0]] = ship2Final;
-                    setupBoardPlayer1[shipPos2Y[1]][shipPos2X[1]] = ship2Final;
+                    setupBoardPlayer1[s2b1YP1][s2b1XP1] = ship2Final;
+                    setupBoardPlayer1[s2b2YP1][s2b2XP1] = ship2Final;
                 }
                 if(ship3AP1){
-                    setupBoardPlayer1[shipPos3AY[0]][shipPos3AX[0]] = ship;
-                    setupBoardPlayer1[shipPos3AY[1]][shipPos3AX[1]] = ship;
-                    setupBoardPlayer1[shipPos3AY[2]][shipPos3AX[2]] = ship;
+                    setupBoardPlayer1[s3Ab1YP1][s3Ab1XP1] = ship;
+                    setupBoardPlayer1[s3Ab2YP1][s3Ab2XP1] = ship;
+                    setupBoardPlayer1[s3Ab3YP1][s3Ab3XP1] = ship;
                 }
                 if(ship3AP1print){
-                    setupBoardPlayer1[shipPos3AY[0]][shipPos3AX[0]] = ship3AFinal;
-                    setupBoardPlayer1[shipPos3AY[1]][shipPos3AX[1]] = ship3AFinal;
-                    setupBoardPlayer1[shipPos3AY[2]][shipPos3AX[2]] = ship3AFinal;
+                    setupBoardPlayer1[s3Ab1YP1][s3Ab1XP1] = ship3AFinal;
+                    setupBoardPlayer1[s3Ab2YP1][s3Ab2XP1] = ship3AFinal;
+                    setupBoardPlayer1[s3Ab3YP1][s3Ab3XP1] = ship3AFinal;
                 }
                 if(ship3BP1){
-                    setupBoardPlayer1[shipPos3BY[0]][shipPos3BX[0]] = ship;
-                    setupBoardPlayer1[shipPos3BY[1]][shipPos3BX[1]] = ship;
-                    setupBoardPlayer1[shipPos3BY[2]][shipPos3BX[2]] = ship;
+                    setupBoardPlayer1[s3Bb1YP1][s3Bb1XP1] = ship;
+                    setupBoardPlayer1[s3Bb2YP1][s3Bb2XP1] = ship;
+                    setupBoardPlayer1[s3Bb3YP1][s3Bb3XP1] = ship;
                 }
                 if(ship3BP1print){
-                    setupBoardPlayer1[shipPos3BY[0]][shipPos3BX[0]] = ship3BFinal;
-                    setupBoardPlayer1[shipPos3BY[1]][shipPos3BX[1]] = ship3BFinal;
-                    setupBoardPlayer1[shipPos3BY[2]][shipPos3BX[2]] = ship3BFinal;
+                    setupBoardPlayer1[s3Bb1YP1][s3Bb1XP1] = ship3BFinal;
+                    setupBoardPlayer1[s3Bb2YP1][s3Bb2XP1] = ship3BFinal;
+                    setupBoardPlayer1[s3Bb3YP1][s3Bb3XP1] = ship3BFinal;
                 }
                 if(ship4P1){    
-                    setupBoardPlayer1[shipPos4Y[0]][shipPos4X[0]] = ship;
-                    setupBoardPlayer1[shipPos4Y[1]][shipPos4X[1]] = ship;
-                    setupBoardPlayer1[shipPos4Y[2]][shipPos4X[2]] = ship;
-                    setupBoardPlayer1[shipPos4Y[3]][shipPos4X[3]] = ship;
+                    setupBoardPlayer1[s4b1YP1][s4b1XP1] = ship;
+                    setupBoardPlayer1[s4b2YP1][s4b2XP1] = ship;
+                    setupBoardPlayer1[s4b3YP1][s4b3XP1] = ship;
+                    setupBoardPlayer1[s4b4YP1][s4b4XP1] = ship;
                 }
                 if(ship4P1print){
-                    setupBoardPlayer1[shipPos4Y[0]][shipPos4X[0]] = ship4Final;
-                    setupBoardPlayer1[shipPos4Y[1]][shipPos4X[1]] = ship4Final;
-                    setupBoardPlayer1[shipPos4Y[2]][shipPos4X[2]] = ship4Final;
-                    setupBoardPlayer1[shipPos4Y[3]][shipPos4X[3]] = ship4Final;
+                    setupBoardPlayer1[s4b1YP1][s4b1XP1] = ship4Final;
+                    setupBoardPlayer1[s4b2YP1][s4b2XP1] = ship4Final;
+                    setupBoardPlayer1[s4b3YP1][s4b3XP1] = ship4Final;
+                    setupBoardPlayer1[s4b4YP1][s4b4XP1] = ship4Final;
                 }
                 if(ship5P1){     
-                    setupBoardPlayer1[shipPos5Y[0]][shipPos5X[0]] = ship;
-                    setupBoardPlayer1[shipPos5Y[1]][shipPos5X[1]] = ship;
-                    setupBoardPlayer1[shipPos5Y[2]][shipPos5X[2]] = ship;
-                    setupBoardPlayer1[shipPos5Y[3]][shipPos5X[3]] = ship;
-                    setupBoardPlayer1[shipPos5Y[4]][shipPos5X[4]] = ship;
+                    setupBoardPlayer1[s5b1YP1][s5b1XP1] = ship;
+                    setupBoardPlayer1[s5b2YP1][s5b2XP1] = ship;
+                    setupBoardPlayer1[s5b3YP1][s5b3XP1] = ship;
+                    setupBoardPlayer1[s5b4YP1][s5b4XP1] = ship;
+                    setupBoardPlayer1[s5b5YP1][s5b5XP1] = ship;
                 }
                 if(ship5P1print){
-                    setupBoardPlayer1[shipPos5Y[0]][shipPos5X[0]] = ship5Final;
-                    setupBoardPlayer1[shipPos5Y[1]][shipPos5X[1]] = ship5Final;
-                    setupBoardPlayer1[shipPos5Y[2]][shipPos5X[2]] = ship5Final;
-                    setupBoardPlayer1[shipPos5Y[3]][shipPos5X[3]] = ship5Final;
-                    setupBoardPlayer1[shipPos5Y[4]][shipPos5X[4]] = ship5Final;
+                    setupBoardPlayer1[s5b1YP1][s5b1XP1] = ship5Final;
+                    setupBoardPlayer1[s5b2YP1][s5b2XP1] = ship5Final;
+                    setupBoardPlayer1[s5b3YP1][s5b3XP1] = ship5Final;
+                    setupBoardPlayer1[s5b4YP1][s5b4XP1] = ship5Final;
+                    setupBoardPlayer1[s5b5YP1][s5b5XP1] = ship5Final;
                 }
                 System.out.print(setupBoardPlayer1[i][j]);
             }
@@ -261,58 +266,58 @@ public class improvedproject
             for(int j=0;j<ROWS;j++){
                 setupBoardPlayer2[i][j] = o;
                 if(ship2P2){
-                    setupBoardPlayer2[shipPos2Y[0]][shipPos2X[0]] = ship;
-                    setupBoardPlayer2[shipPos2Y[1]][shipPos2X[1]] = ship;
+                    setupBoardPlayer2[s2b1YP2][s2b1XP2] = ship;
+                    setupBoardPlayer2[s2b2YP2][s2b2XP2] = ship;
                 }
                 if(ship2P2print){
-                    setupBoardPlayer2[shipPos2Y[0]][shipPos2X[0]] = ship2Final;
-                    setupBoardPlayer2[shipPos2Y[1]][shipPos2X[1]] = ship2Final;
+                    setupBoardPlayer2[s2b1YP2][s2b1XP2] = ship2Final;
+                    setupBoardPlayer2[s2b2YP2][s2b2XP2] = ship2Final;
                 }
                 if(ship3AP2){
-                    setupBoardPlayer2[shipPos3AY[0]][shipPos3AX[0]] = ship;
-                    setupBoardPlayer2[shipPos3AY[1]][shipPos3AX[1]] = ship;
-                    setupBoardPlayer2[shipPos3AY[2]][shipPos3AX[2]] = ship;
+                    setupBoardPlayer2[s3Ab1YP2][s3Ab1XP2] = ship;
+                    setupBoardPlayer2[s3Ab2YP2][s3Ab2XP2] = ship;
+                    setupBoardPlayer2[s3Ab3YP2][s3Ab3XP2] = ship;
                 }
                 if(ship3AP2print){
-                    setupBoardPlayer2[shipPos3AY[0]][shipPos3AX[0]] = ship3AFinal;
-                    setupBoardPlayer2[shipPos3AY[1]][shipPos3AX[1]] = ship3AFinal;
-                    setupBoardPlayer2[shipPos3AY[2]][shipPos3AX[2]] = ship3AFinal;
+                    setupBoardPlayer2[s3Ab1YP2][s3Ab1XP2] = ship3AFinal;
+                    setupBoardPlayer2[s3Ab2YP2][s3Ab2XP2] = ship3AFinal;
+                    setupBoardPlayer2[s3Ab3YP2][s3Ab3XP2] = ship3AFinal;
                 }
                 if(ship3BP2){
-                    setupBoardPlayer2[shipPos3BY[0]][shipPos3BX[0]] = ship;
-                    setupBoardPlayer2[shipPos3BY[1]][shipPos3BX[1]] = ship;
-                    setupBoardPlayer2[shipPos3BY[2]][shipPos3BX[2]] = ship;
+                    setupBoardPlayer2[s3Bb1YP2][s3Bb1XP2] = ship;
+                    setupBoardPlayer2[s3Bb2YP2][s3Bb2XP2] = ship;
+                    setupBoardPlayer2[s3Bb3YP2][s3Bb3XP2] = ship;
                 }
                 if(ship3BP2print){
-                    setupBoardPlayer2[shipPos3BY[0]][shipPos3BX[0]] = ship3BFinal;
-                    setupBoardPlayer2[shipPos3BY[1]][shipPos3BX[1]] = ship3BFinal;
-                    setupBoardPlayer2[shipPos3BY[2]][shipPos3BX[2]] = ship3BFinal;
+                    setupBoardPlayer2[s3Bb1YP2][s3Bb1XP2] = ship3BFinal;
+                    setupBoardPlayer2[s3Bb2YP2][s3Bb2XP2] = ship3BFinal;
+                    setupBoardPlayer2[s3Bb3YP2][s3Bb3XP2] = ship3BFinal;
                 }
                 if(ship4P2){    
-                    setupBoardPlayer2[shipPos4Y[0]][shipPos4X[0]] = ship;
-                    setupBoardPlayer2[shipPos4Y[1]][shipPos4X[1]] = ship;
-                    setupBoardPlayer2[shipPos4Y[2]][shipPos4X[2]] = ship;
-                    setupBoardPlayer2[shipPos4Y[3]][shipPos4X[3]] = ship;
+                    setupBoardPlayer2[s4b1YP2][s4b1XP2] = ship;
+                    setupBoardPlayer2[s4b2YP2][s4b2XP2] = ship;
+                    setupBoardPlayer2[s4b3YP2][s4b3XP2] = ship;
+                    setupBoardPlayer2[s4b4YP2][s4b4XP2] = ship;
                 }
                 if(ship4P2print){
-                    setupBoardPlayer2[shipPos4Y[0]][shipPos4X[0]] = ship4Final;
-                    setupBoardPlayer2[shipPos4Y[1]][shipPos4X[1]] = ship4Final;
-                    setupBoardPlayer2[shipPos4Y[2]][shipPos4X[2]] = ship4Final;
-                    setupBoardPlayer2[shipPos4Y[3]][shipPos4X[3]] = ship4Final;
+                    setupBoardPlayer2[s4b1YP2][s4b1XP2] = ship4Final;
+                    setupBoardPlayer2[s4b2YP2][s4b2XP2] = ship4Final;
+                    setupBoardPlayer2[s4b3YP2][s4b3XP2] = ship4Final;
+                    setupBoardPlayer2[s4b4YP2][s4b4XP2] = ship4Final;
                 }
                 if(ship5P2){     
-                    setupBoardPlayer2[shipPos5Y[0]][shipPos5X[0]] = ship;
-                    setupBoardPlayer2[shipPos5Y[1]][shipPos5X[1]] = ship;
-                    setupBoardPlayer2[shipPos5Y[2]][shipPos5X[2]] = ship;
-                    setupBoardPlayer2[shipPos5Y[3]][shipPos5X[3]] = ship;
-                    setupBoardPlayer2[shipPos5Y[4]][shipPos5X[4]] = ship;
+                    setupBoardPlayer2[s5b1YP2][s5b1XP2] = ship;
+                    setupBoardPlayer2[s5b2YP2][s5b2XP2] = ship;
+                    setupBoardPlayer2[s5b3YP2][s5b3XP2] = ship;
+                    setupBoardPlayer2[s5b4YP2][s5b4XP2] = ship;
+                    setupBoardPlayer2[s5b5YP2][s5b5XP2] = ship;
                 }
                 if(ship5P2print){
-                    setupBoardPlayer2[shipPos5Y[0]][shipPos5X[0]] = ship5Final;
-                    setupBoardPlayer2[shipPos5Y[1]][shipPos5X[1]] = ship5Final;
-                    setupBoardPlayer2[shipPos5Y[2]][shipPos5X[2]] = ship5Final;
-                    setupBoardPlayer2[shipPos5Y[3]][shipPos5X[3]] = ship5Final;
-                    setupBoardPlayer2[shipPos5Y[4]][shipPos5X[4]] = ship5Final;
+                    setupBoardPlayer2[s5b1YP2][s5b1XP2] = ship5Final;
+                    setupBoardPlayer2[s5b2YP2][s5b2XP2] = ship5Final;
+                    setupBoardPlayer2[s5b3YP2][s5b3XP2] = ship5Final;
+                    setupBoardPlayer2[s5b4YP2][s5b4XP2] = ship5Final;
+                    setupBoardPlayer2[s5b5YP2][s5b5XP2] = ship5Final;
                 }
                 System.out.print(setupBoardPlayer2[i][j]);
             }
@@ -328,35 +333,35 @@ public class improvedproject
             cmd0 = cmd0.toLowerCase();
             canMoveShips();
             if(cmd0.equals("right") && canMoveS2P1R == true || cmd0.equals("r") && canMoveS2P1R == true){
-                shipPos2X[0]++;
-                shipPos2X[1]++;
+                s2b1XP1++;
+                s2b2XP1++;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("left") && canMoveS2P1L == true || cmd0.equals("l") && canMoveS2P1L == true){
-                shipPos2X[0]--;
-                shipPos2X[1]--;
+                s2b1XP1--;
+                s2b2XP1--;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("up") && canMoveS2P1U == true || cmd0.equals("u") && canMoveS2P1U == true){
-                shipPos2Y[0]--;
-                shipPos2Y[1]--;
+                s2b1YP1--;
+                s2b2YP1--;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("down") && canMoveS2P1D == true || cmd0.equals("d") && canMoveS2P1D == true){
-                shipPos2Y[0]++;
-                shipPos2Y[1]++;
+                s2b1YP1++;
+                s2b2YP1++;
                 setupBoardPlayer1();
             }
             if(cmd0.equals("turn") && s2TP1 == 0 && canMoveS2P1T0  == true || cmd0.equals("t") && s2TP1 == 0 && canMoveS2P1T0  == true){
-                shipPos2X[1]++;
-                shipPos2Y[1]--;
+                s2b2XP1++;
+                s2b2YP1--;
                 cmd0 = " ";
                 s2TP1 = 1;
                 setupBoardPlayer1();              
             }
             if(cmd0.equals("turn") && s2TP1 == 1 && canMoveS2P1T1 == true|| cmd0.equals("t") && s2TP1 == 1 && canMoveS2P1T1 == true){
-                shipPos2X[1]--;
-                shipPos2Y[1]++;
+                s2b2XP1--;
+                s2b2YP1++;
                 cmd0 = " ";
                 s2TP1 = 0;
                 setupBoardPlayer1();
@@ -376,46 +381,46 @@ public class improvedproject
             cmd1 = cmd1.toLowerCase();
             canMoveShips();
             if(cmd1.equals("right") && canMoveS3AP1R == true|| cmd1.equals("r") && canMoveS3AP1R == true){
-                shipPos3AX[0]++;
-                shipPos3AX[1]++;
-                shipPos3AX[2]++;
+                s3Ab1XP1++;
+                s3Ab2XP1++;
+                s3Ab3XP1++;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("left") && canMoveS3AP1L == true || cmd1.equals("l") && canMoveS3AP1L == true){
-                shipPos3AX[0]--;
-                shipPos3AX[1]--;
-                shipPos3AX[2]--;
+                s3Ab1XP1--;
+                s3Ab2XP1--;
+                s3Ab3XP1--;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("up") && canMoveS3AP1U == true || cmd1.equals("u") && canMoveS3AP1U == true){
-                shipPos3AY[0]--;
-                shipPos3AY[1]--;
-                shipPos3AY[2]--;
+                s3Ab1YP1--;
+                s3Ab2YP1--;
+                s3Ab3YP1--;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("down") && canMoveS3AP1D == true || cmd1.equals("d") && canMoveS3AP1D == true){
-                shipPos3AY[0]++;
-                shipPos3AY[1]++;
-                shipPos3AY[2]++;
+                s3Ab1YP1++;
+                s3Ab2YP1++;
+                s3Ab3YP1++;
                 setupBoardPlayer1();
             }
             if(cmd1.equals("turn") && s3ATP1 == 0  && canMoveS3AP1T0 == true || cmd1.equals("t") && s3ATP1 == 0 && canMoveS3AP1T0 == true){
-                shipPos3AX[1]++;
-                shipPos3AY[1]--;
+                s3Ab2XP1++;
+                s3Ab2YP1--;
                 
-                shipPos3AX[2] += 2;
-                shipPos3AY[2] -= 2;
+                s3Ab3XP1 += 2;
+                s3Ab3YP1 -= 2;
                 
                 cmd1 = " ";
                 s3ATP1 = 1;
                 setupBoardPlayer1();              
             }
             if(cmd1.equals("turn") && s3ATP1 == 1 && canMoveS3AP1T0 == true|| cmd1.equals("t") && s3ATP1 == 1 && canMoveS3AP1T0 == true){
-                shipPos3AX[1]--;
-                shipPos3AY[1]++;
+                s3Ab2XP1--;
+                s3Ab2YP1++;
                 
-                shipPos3AX[2] -= 2;
-                shipPos3AY[2] += 2;
+                s3Ab3XP1 -= 2;
+                s3Ab3YP1 += 2;
                 
                 cmd1 = " ";
                 s3ATP1 = 0;
@@ -435,46 +440,46 @@ public class improvedproject
             String cmd2 = kb.nextLine();
             cmd2 = cmd2.toLowerCase();
             if(cmd2.equals("right") || cmd2.equals("r")){
-                shipPos3BX[0]++;
-                shipPos3BX[1]++;
-                shipPos3BX[2]++;
+                s3Bb1XP1++;
+                s3Bb2XP1++;
+                s3Bb3XP1++;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("left") || cmd2.equals("l")){
-                shipPos3BX[0]--;
-                shipPos3BX[1]--;
-                shipPos3BX[2]--;
+                s3Bb1XP1--;
+                s3Bb2XP1--;
+                s3Bb3XP1--;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("up") || cmd2.equals("u")){
-                shipPos3BY[0]--;
-                shipPos3BY[1]--;
-                shipPos3BY[2]--;
+                s3Bb1YP1--;
+                s3Bb2YP1--;
+                s3Bb3YP1--;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("down") || cmd2.equals("d")){
-                shipPos3BY[0]++;
-                shipPos3BY[1]++;
-                shipPos3BY[2]++;
+                s3Bb1YP1++;
+                s3Bb2YP1++;
+                s3Bb3YP1++;
                 setupBoardPlayer1();
             }
             if(cmd2.equals("turn") && s3BTP1 == 0|| cmd2.equals("t") && s3BTP1 == 0){
-                shipPos3BX[1]++;
-                shipPos3BY[1]--;
+                s3Bb2XP1++;
+                s3Bb2YP1--;
                 
-                shipPos3BX[2] += 2;
-                shipPos3BY[2] -= 2;
+                s3Bb3XP1 += 2;
+                s3Bb3YP1 -= 2;
                 
                 cmd2 = " ";
                 s3BTP1 = 1;
                 setupBoardPlayer1();              
             }
             if(cmd2.equals("turn") && s3BTP1 == 1|| cmd2.equals("t") && s3BTP1 == 1){
-                shipPos3BX[1]--; 
-                shipPos3BY[1]++;
+                s3Bb2XP1--; 
+                s3Bb2YP1++;
                 
-                shipPos3BX[2] -= 2;
-                shipPos3BY[2] += 2;
+                s3Bb3XP1 -= 2;
+                s3Bb3YP1 += 2;
                 
                 cmd2 = " ";
                 s3BTP1 = 0;
@@ -632,8 +637,8 @@ public class improvedproject
                 ship5P1 = false;
                 ship5P1print = true;
                 ship2P2 = true;
-                setupBoardPlayer1();
-                //ship2P2CMD();
+                setupBoardPlayer2();
+                ship2P2CMD();
             }
         }
     }
