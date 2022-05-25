@@ -49,7 +49,7 @@ public class Term2Project
     int[] ship5P1FinalY = new int[5];
     
     int[] shipLengthArray = {2, 3, 3, 4, 5};
-    int shipLengthAdd = 0;
+    int shipLengthAdd = 0;//This is used as an index into the ship length array
     int shipLength = 2;
     
     int shipTurn = 0;
@@ -77,12 +77,13 @@ public class Term2Project
         for(int i=0;i<COLS;i++){
             for(int j=0;j<ROWS;j++){
                 setupBoardPlayer1[i][j] = wave;
-                for(int p=0;p<shipLength;p++)setupBoardPlayer1[shipPosY[p]][shipPosX[p]] = ship;
-                if (ship1Print)for(int k=0;k<2;k++)setupBoardPlayer1[ship1P1FinalY[k]][ship1P1FinalX[k]] = ship1Final;
+                //for(int k=0;k<shipLengthArray[shipLengthAdd]
+                if (ship1Print)for(int k=0;k<shipLengthArray[shipLengthAdd];k++)setupBoardPlayer1[ship1P1FinalY[k]][ship1P1FinalX[k]] = ship1Final;
                 if (ship2Print)for(int l=0;l<3;l++)setupBoardPlayer1[ship2P1FinalY[l]][ship2P1FinalX[l]] = ship2Final;
                 if (ship3Print)for(int m=0;m<3;m++)setupBoardPlayer1[ship3P1FinalY[m]][ship3P1FinalX[m]] = ship3Final;
                 if (ship4Print)for(int n=0;n<4;n++)setupBoardPlayer1[ship4P1FinalY[n]][ship4P1FinalX[n]] = ship4Final;
                 if (ship5Print)for(int o=0;o<5;o++)setupBoardPlayer1[ship5P1FinalY[o]][ship5P1FinalX[o]] = ship5Final;
+                for(int p=0;p<shipLength;p++)setupBoardPlayer1[shipPosY[p]][shipPosX[p]] = ship;
                 System.out.print(setupBoardPlayer1[i][j]);
             }
             System.out.print(setupBoardChar + "\u3002");
@@ -150,13 +151,19 @@ public class Term2Project
                 setupBoardPlayer1();
             }
             if(cmd0.equals("next") || cmd0.equals("n")){
-                shipPrint();
+                setFinalShipPos(shipLengthArray[shipLengthAdd]);
                 setupBoardPlayer1();
             }
         }
     } 
     
-    public void shipPrint(){
+    //setFinalShipPos is used copy the temporary ship positions to the final board configuration
+    public void setFinalShipPos(int length){
+        if (player1Play){
+            ship1Print = true;
+            for(int i=0;i<length;i++)ship1P1FinalX[i] = shipPosX[i];
+            for(int i=0;i<length;i++)ship1P1FinalY[i] = shipPosY[i];
+        }
         if(shipLengthAdd==0 && player1Play){
             ship1Print = true;
             for(int i=0;i<2;i++)ship1P1FinalX[i] = shipPosX[i];
@@ -182,10 +189,15 @@ public class Term2Project
             for(int i=0;i<5;i++)ship5P1FinalX[i] = shipPosX[i];
             for(int i=0;i<5;i++)ship5P1FinalY[i] = shipPosY[i];
         }
+        if(shipLengthAdd==5 && player1Play){
+            
+        }
+        if (shipLengthAdd<6){
+            shipLengthAdd++;
+            shipLength = shipLengthArray[shipLengthAdd];
+        }
         for(int i=0;i<5;i++)shipPosX[i] = 0;
         for(int i=0;i<5;i++)shipPosY[i] = i;
-        shipLengthAdd++;
-        shipLength = shipLengthArray[shipLengthAdd];
     }
     
     public void shipCollision(){
