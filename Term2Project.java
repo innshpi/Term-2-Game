@@ -10,15 +10,20 @@ public class Term2Project
     Scanner kb = new Scanner (System.in);//Initiates new scanner
     
     boolean shipMove = false;//Allows ships to move
+    boolean shipShoot = false;//Allows ships to move
     boolean player1Placing = false;//Player 1 can place ships
     boolean player2Placing = false;//Player 2 can place ships
+    boolean player1Playing = false;//Player 1 can place ships
+    boolean player2Playing = false;//Player 2 can place ships
     
     private int ROWS = 10;//Sets how wide the grid is
     private int COLS = 10;//Sets how tall the grid is
-    String setupBoardPlayer1[][] = new String[COLS][ROWS];
-    String setupBoardPlayer2[][] = new String[COLS][ROWS];
+    String placingBoardPlayer1[][] = new String[COLS][ROWS];
+    String placingBoardPlayer2[][] = new String[COLS][ROWS];
+    String playingBoardPlayer1[][] = new String[COLS][ROWS];
+    String playingBoardPlayer2[][] = new String[COLS][ROWS];
     
-    String[] shipChar = {"🛥 ","⛵ ","🚤 ","🚢 ","🛳 ","🌊 ","🕳 "};//All Special char's used
+    String[] shipChar = {"🛥 ","⛵ ","🚤 ","🚢 ","🛳 ","🌊 ","🕳 ","🔥 "};//All Special char's used
     private char setupBoardChar = 65;//Sets the char to the letter A
     
     int[] shipPosX = {0, 0, 0, 0, 0};//Ship movement on the X axis
@@ -69,59 +74,80 @@ public class Term2Project
         // initialise instance variables
         player1Placing = true;//Check if player 1 can place ships
         shipMove = true;//Allows ships to move
-        setupBoardPlayer1();//starts printing the board
+        placingBoardPlayer1();//starts printing the board
         shipCtrl();//starts moving the ships
     }
     
-    //setupBoardPlayer1 is used to make the board where player 1's ships are placed
-    public void setupBoardPlayer1(){
+    //placingBoardPlayer1 is used to make the board where player 1's ships are placed
+    public void placingBoardPlayer1(){
         System.out.print('\u000C');//clears the screen
         for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
         System.out.println();
         //player 1 board for loop, prints out the board
         for(int i=0;i<COLS;i++){//prints board cols
             for(int j=0;j<ROWS;j++){//prints board rows
-                setupBoardPlayer1[i][j] = shipChar[5];//places wave emoji onto the board
-                if(shipLengthPrint>=1)for(int k=0;k<shipLengthArray[0];k++)setupBoardPlayer1[ship1P1FinalY[k]][ship1P1FinalX[k]] = shipChar[0];
-                if(shipLengthPrint>=2)for(int k=0;k<shipLengthArray[1];k++)setupBoardPlayer1[ship2P1FinalY[k]][ship2P1FinalX[k]] = shipChar[1];
-                if(shipLengthPrint>=3)for(int k=0;k<shipLengthArray[2];k++)setupBoardPlayer1[ship3P1FinalY[k]][ship3P1FinalX[k]] = shipChar[2];
-                if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)setupBoardPlayer1[ship4P1FinalY[k]][ship4P1FinalX[k]] = shipChar[3];
-                if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)setupBoardPlayer1[ship5P1FinalY[k]][ship5P1FinalX[k]] = shipChar[4];
+                placingBoardPlayer1[i][j] = shipChar[5];//places wave emoji onto the board
+                if(shipLengthPrint>=1)for(int k=0;k<shipLengthArray[0];k++)placingBoardPlayer1[ship1P1FinalY[k]][ship1P1FinalX[k]] = shipChar[0];
+                if(shipLengthPrint>=2)for(int k=0;k<shipLengthArray[1];k++)placingBoardPlayer1[ship2P1FinalY[k]][ship2P1FinalX[k]] = shipChar[1];
+                if(shipLengthPrint>=3)for(int k=0;k<shipLengthArray[2];k++)placingBoardPlayer1[ship3P1FinalY[k]][ship3P1FinalX[k]] = shipChar[2];
+                if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer1[ship4P1FinalY[k]][ship4P1FinalX[k]] = shipChar[3];
+                if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer1[ship5P1FinalY[k]][ship5P1FinalX[k]] = shipChar[4];
                 //indicates where a ship will be placed
-                if(shipLengthPrint<=4)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)setupBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
-                System.out.print(setupBoardPlayer1[i][j]);//prints out everything placed on the board
+                if(shipLengthPrint<=4)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
+                System.out.print(placingBoardPlayer1[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
-            setupBoardChar++;//go forward 1 charachter in the alphabet
+            setupBoardChar++;//go forward 1 character in the alphabet
             if (i==COLS-1)setupBoardChar = 65;//reset character to A
             System.out.println();
         }
+        System.out.println("PLAYER 1 PLACING");//Tells the players who is placing
     }
     
-    //setupBoardPlayer2 is used to make the board where player 2's ships are placed
-    public void setupBoardPlayer2(){
+    //placingBoardPlayer2 is used to make the board where player 2's ships are placed
+    public void placingBoardPlayer2(){
         System.out.print('\u000C');//clears the screen
         for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
         System.out.println();
         //player 2 board for loop, prints out the board
         for(int i=0;i<COLS;i++){//prints board cols
             for(int j=0;j<ROWS;j++){//prints board rows
-                setupBoardPlayer2[i][j] = shipChar[5];//places wave emoji onto the board
-                if(shipLengthPrint>=1)for(int k=0;k<shipLengthArray[0];k++)setupBoardPlayer2[ship1P2FinalY[k]][ship1P2FinalX[k]] = shipChar[0];
-                if(shipLengthPrint>=2)for(int k=0;k<shipLengthArray[1];k++)setupBoardPlayer2[ship2P2FinalY[k]][ship2P2FinalX[k]] = shipChar[1];
-                if(shipLengthPrint>=3)for(int k=0;k<shipLengthArray[2];k++)setupBoardPlayer2[ship3P2FinalY[k]][ship3P2FinalX[k]] = shipChar[2];
-                if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)setupBoardPlayer2[ship4P2FinalY[k]][ship4P2FinalX[k]] = shipChar[3];
-                if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)setupBoardPlayer2[ship5P2FinalY[k]][ship5P2FinalX[k]] = shipChar[4];
+                placingBoardPlayer2[i][j] = shipChar[5];//places wave emoji onto the board
+                if(shipLengthPrint>=1)for(int k=0;k<shipLengthArray[0];k++)placingBoardPlayer2[ship1P2FinalY[k]][ship1P2FinalX[k]] = shipChar[0];
+                if(shipLengthPrint>=2)for(int k=0;k<shipLengthArray[1];k++)placingBoardPlayer2[ship2P2FinalY[k]][ship2P2FinalX[k]] = shipChar[1];
+                if(shipLengthPrint>=3)for(int k=0;k<shipLengthArray[2];k++)placingBoardPlayer2[ship3P2FinalY[k]][ship3P2FinalX[k]] = shipChar[2];
+                if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer2[ship4P2FinalY[k]][ship4P2FinalX[k]] = shipChar[3];
+                if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer2[ship5P2FinalY[k]][ship5P2FinalX[k]] = shipChar[4];
                 //indicates where a ship will be placed
-                if(shipLengthPrint<=4)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)setupBoardPlayer2[shipPosY[l]][shipPosX[l]] = shipChar[6];
-                System.out.print(setupBoardPlayer2[i][j]);//prints out everything placed on the board
+                if(shipLengthPrint<=4 || shipLengthPrint > -1)
+                    for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer2[shipPosY[l]][shipPosX[l]] = shipChar[6];
+                System.out.print(placingBoardPlayer2[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
-            setupBoardChar++;//go forward 1 charachter in the alphabet
+            setupBoardChar++;//go forward 1 character in the alphabet
             if (i==COLS-1)setupBoardChar = 65;//reset character to A
             System.out.println();
         }
-        System.out.println(shipLengthAdd);
+        System.out.println("PLAYER 2 PLACING");//Tells the players who is placing
+    }
+    
+    //playingBoardPlayer1 is used to keep track of what ships have been shot by player 1
+    public void playingBoardPlayer1(){
+        System.out.print('\u000C');//clears the screen
+        for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
+        System.out.println();
+        //player 2 board for loop, prints out the board
+        for(int i=0;i<COLS;i++){//prints board cols
+            for(int j=0;j<ROWS;j++){//prints board rows
+                playingBoardPlayer1[i][j] = shipChar[5];//places wave emoji onto the board
+                System.out.print(playingBoardPlayer1[i][j]);//prints out everything placed on the board
+            }
+            System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
+            setupBoardChar++;//go forward 1 character in the alphabet
+            if (i==COLS-1)setupBoardChar = 65;//reset character to A
+            System.out.println();
+        }
+        System.out.println("PLAYER 1 PLAYING");//Tells the players who is playing
     }
     
     //shipCtrl is used to move all ships on the grid
@@ -132,45 +158,52 @@ public class Term2Project
             shipCollision();
             if(cmd0.equals("right") && canMoveR == true || cmd0.equals("r") && canMoveR == true){
                 for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]++;
-                if(player1Placing)setupBoardPlayer1();
-                if(player2Placing)setupBoardPlayer2();
+                if(player1Placing)placingBoardPlayer1();
+                if(player2Placing)placingBoardPlayer2();
             }
             if(cmd0.equals("left") && canMoveL == true || cmd0.equals("l") && canMoveL == true){
                 for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]--;
-                if(player1Placing)setupBoardPlayer1();
-                if(player2Placing)setupBoardPlayer2();
+                if(player1Placing)placingBoardPlayer1();
+                if(player2Placing)placingBoardPlayer2();
             }
             if(cmd0.equals("up") && canMoveU == true || cmd0.equals("u") && canMoveU == true){
                 for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]--;
-                if(player1Placing)setupBoardPlayer1();
-                if(player2Placing)setupBoardPlayer2();
+                if(player1Placing)placingBoardPlayer1();
+                if(player2Placing)placingBoardPlayer2();
             }
             if(cmd0.equals("down") && canMoveD == true || cmd0.equals("d") && canMoveD == true){
                 for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]++;
-                if(player1Placing)setupBoardPlayer1();
-                if(player2Placing)setupBoardPlayer2();
+                if(player1Placing)placingBoardPlayer1();
+                if(player2Placing)placingBoardPlayer2();
             }
             if(cmd0.equals("turn") && shipTurn == 0 && canMoveT0 == true || cmd0.equals("t") && shipTurn == 0 && canMoveT0  == true){
                 for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]+=i;
                 for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]-=i;
                 cmd0 = " ";
                 shipTurn = 1;
-                if(player1Placing)setupBoardPlayer1();
-                if(player2Placing)setupBoardPlayer2();
+                if(player1Placing)placingBoardPlayer1();
+                if(player2Placing)placingBoardPlayer2();
             }
             if(cmd0.equals("turn") && shipTurn == 1 && canMoveT1 == true || cmd0.equals("t") && shipTurn == 1 && canMoveT1 == true){
                 for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]-=i;
                 for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]+=i;
                 cmd0 = " ";
                 shipTurn = 0;
-                if(player1Placing)setupBoardPlayer1();
-                if(player2Placing)setupBoardPlayer2();
+                if(player1Placing)placingBoardPlayer1();
+                if(player2Placing)placingBoardPlayer2();
             }
             if(cmd0.equals("next") || cmd0.equals("n")){
                 setFinalShipPos();
             }
         }
     } 
+    
+    //shipShoot is used copy the temporary ship positions to the final board configuration
+    public void shipWeapon(){
+        while(shipShoot){
+            
+        }
+    }
     
     //setFinalShipPos is used copy the temporary ship positions to the final board configuration
     public void setFinalShipPos(){
@@ -190,7 +223,7 @@ public class Term2Project
             for(int i=0;i<5;i++)shipPosX[i] = 0;
             for(int i=0;i<5;i++)shipPosY[i] = i;
             shipTurn = 0;
-            setupBoardPlayer1();
+            placingBoardPlayer1();
             if(shipLengthPrint==5){
                 turnEnd();
             }
@@ -210,7 +243,7 @@ public class Term2Project
             for(int i=0;i<5;i++)shipPosX[i] = 0;
             for(int i=0;i<5;i++)shipPosY[i] = i;
             shipTurn = 0;
-            setupBoardPlayer2();
+            placingBoardPlayer2();
             if(shipLengthPrint==5){
                 turnEnd();
             }
@@ -230,24 +263,26 @@ public class Term2Project
             if(cmd0.equals("y") && player1Placing){
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
-                setupBoardPlayer2();
+                placingBoardPlayer2();
                 player1Placing = false;//Check if player 1 can place ships
                 player2Placing = true;//Check if player 2 can place ships
             }
-            if(cmd0.equals("y") && player2Placing){
+            else if(cmd0.equals("y") && player2Placing){
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
-                setupBoardPlayer2();
+                placingBoardPlayer2();
+                player2Placing = false;//Check if player 2 can place ships
+                playingBoardPlayer1();
             }
             if(cmd0.equals("n") && player1Placing){
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
-                setupBoardPlayer1();
+                placingBoardPlayer1();
             }
-            if(cmd0.equals("n") && player1Placing){
+            else if(cmd0.equals("n") && player2Placing){
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
-                setupBoardPlayer2();
+                placingBoardPlayer2();
             }
         }
     }
