@@ -2,7 +2,7 @@
 comment0.target=Term2Project
 comment1.params=
 comment1.target=Term2Project()
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Term2Project\n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Term2Project\r\n
 comment2.params=
 comment2.target=void\ placingBoardPlayer1()
 comment3.params=

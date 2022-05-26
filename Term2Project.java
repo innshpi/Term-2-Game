@@ -24,7 +24,7 @@ public class Term2Project
     String playingBoardPlayer2[][] = new String[COLS][ROWS];
     
     String[] shipChar = {"🛥 ","⛵ ","🚤 ","🚢 ","🛳 ","🌊 ","🕳 ","🔥 "};//All Special char's used
-    private char setupBoardChar = 65;//Sets the char to the letter A
+    private char setupBoardChar = 'A';//Sets the char to the letter A
     
     int[] shipPosX = {0, 0, 0, 0, 0};//Ship movement on the X axis
     int[] shipPosY = {0, 1, 2, 3, 4};//Ship movement on the Y axis
@@ -93,12 +93,12 @@ public class Term2Project
                 if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer1[ship4P1FinalY[k]][ship4P1FinalX[k]] = shipChar[3];
                 if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer1[ship5P1FinalY[k]][ship5P1FinalX[k]] = shipChar[4];
                 //indicates where a ship will be placed
-                if(shipLengthPrint<=4)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
+                if(shipLengthPrint<=4 && shipLengthPrint > -1)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
                 System.out.print(placingBoardPlayer1[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
             setupBoardChar++;//go forward 1 character in the alphabet
-            if (i==COLS-1)setupBoardChar = 65;//reset character to A
+            if (i==COLS-1)setupBoardChar = 'A';//reset character to A
             System.out.println();
         }
         System.out.println("PLAYER 1 PLACING");//Tells the players who is placing
@@ -119,13 +119,12 @@ public class Term2Project
                 if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer2[ship4P2FinalY[k]][ship4P2FinalX[k]] = shipChar[3];
                 if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer2[ship5P2FinalY[k]][ship5P2FinalX[k]] = shipChar[4];
                 //indicates where a ship will be placed
-                if(shipLengthPrint<=4 || shipLengthPrint > -1)
-                    for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer2[shipPosY[l]][shipPosX[l]] = shipChar[6];
+                if(shipLengthPrint<=4 && shipLengthPrint > -1)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer2[shipPosY[l]][shipPosX[l]] = shipChar[6];
                 System.out.print(placingBoardPlayer2[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
             setupBoardChar++;//go forward 1 character in the alphabet
-            if (i==COLS-1)setupBoardChar = 65;//reset character to A
+            if (i==COLS-1)setupBoardChar = 'A';//reset character to A
             System.out.println();
         }
         System.out.println("PLAYER 2 PLACING");//Tells the players who is placing
@@ -144,7 +143,7 @@ public class Term2Project
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
             setupBoardChar++;//go forward 1 character in the alphabet
-            if (i==COLS-1)setupBoardChar = 65;//reset character to A
+            if (i==COLS-1)setupBoardChar = 'A';//reset character to A
             System.out.println();
         }
         System.out.println("PLAYER 1 PLAYING");//Tells the players who is playing
@@ -201,13 +200,16 @@ public class Term2Project
     //shipShoot is used copy the temporary ship positions to the final board configuration
     public void shipWeapon(){
         while(shipShoot){
-            
+            System.out.println("Type coordinates to shoot");
+            System.out.println("First type a number to choose the row you will shoot\nThen type a letter to choose the column you will shoot\ne.g. 1A");
+            String cmd0 = kb.nextLine();
+            cmd0 = cmd0.toLowerCase();
         }
     }
     
     //setFinalShipPos is used copy the temporary ship positions to the final board configuration
     public void setFinalShipPos(){
-        if (player1Placing){
+        if (player1Placing==true){
             shipLengthPrint++;
             if(shipLengthAdd<4)shipLengthAdd++;
             if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P1FinalX[i] = shipPosX[i];
@@ -227,7 +229,7 @@ public class Term2Project
             if(shipLengthPrint==5){
                 turnEnd();
             }
-        }else if (player2Placing){
+        }else if (player2Placing==true){
             shipLengthPrint++;
             if(shipLengthAdd<4)shipLengthAdd++;
             if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P2FinalX[i] = shipPosX[i];
@@ -270,9 +272,10 @@ public class Term2Project
             else if(cmd0.equals("y") && player2Placing){
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
-                placingBoardPlayer2();
                 player2Placing = false;//Check if player 2 can place ships
                 playingBoardPlayer1();
+                shipShoot = true;//Check if the player can shoot ships
+                shipWeapon();//Start the ship shooting phase of the game
             }
             if(cmd0.equals("n") && player1Placing){
                 shipLengthAdd = 0;
