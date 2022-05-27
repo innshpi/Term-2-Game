@@ -4,6 +4,8 @@
  * @author (Piper Inns Hall)
  * @version (19/05/22)
  */
+
+//win condition if ship hit counter -1 if counter = 0 game win for other player
 import java.util.Scanner;
 public class Term2Project
 {
@@ -11,6 +13,8 @@ public class Term2Project
     
     boolean shipMove = false;//Allows ships to move
     boolean shipShoot = false;//Allows ships to move
+    boolean player1PlayingSetup = false;
+    boolean player2PlayingSetup = false;
     boolean player1Placing = false;//Player 1 can place ships
     boolean player2Placing = false;//Player 2 can place ships
     boolean player1Playing = false;//Player 1 can place ships
@@ -139,18 +143,36 @@ public class Term2Project
         System.out.print('\u000C');//clears the screen
         for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
         System.out.println();
+        //player 1 board for loop, prints out the board
+        for(int i=0;i<COLS;i++){//prints board cols
+            for(int j=0;j<ROWS;j++){//prints board rows
+                if (player1PlayingSetup == true)playingBoardPlayer1[i][j] = shipChar[5];   //places wave emoji onto the board
+                System.out.print(playingBoardPlayer1[i][j]);//prints out everything placed on the board
+            }
+            System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
+            setupBoardChar++;//go forward 1 character in the alphabet
+            if (i==COLS-1)setupBoardChar = 'A';   //reset character to A
+            System.out.println();
+        }
+        System.out.println("PLAYER 1 PLAYING");//Tells the players who is playing
+    }
+    
+    public void playingBoardPlayer2(){
+        System.out.print('\u000C');//clears the screen
+        for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
+        System.out.println();
         //player 2 board for loop, prints out the board
         for(int i=0;i<COLS;i++){//prints board cols
             for(int j=0;j<ROWS;j++){//prints board rows
-                playingBoardPlayer1[i][j] = shipChar[5];//places wave emoji onto the board
-                System.out.print(playingBoardPlayer1[i][j]);//prints out everything placed on the board
+                if (player2PlayingSetup == true)playingBoardPlayer2[i][j] = shipChar[5];//places wave emoji onto the board
+                System.out.print(playingBoardPlayer2[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
             setupBoardChar++;//go forward 1 character in the alphabet
             if (i==COLS-1)setupBoardChar = 'A';//reset character to A
             System.out.println();
         }
-        System.out.println("PLAYER 1 PLAYING");//Tells the players who is playing
+        System.out.println("PLAYER 2 PLAYING");//Tells the players who is playing
     }
     
     //shipCtrl is used to move all ships on the grid
@@ -204,22 +226,33 @@ public class Term2Project
     //shipShoot is used copy the temporary ship positions to the final board configuration
     public void shipWeapon(){
         while(shipShoot){
-            char shootChar = 'a';
+            System.out.println();
             System.out.println("Type coordinates to shoot");
-            System.out.println("First type a number to choose the row you will shoot\nThen type a letter to choose the column you will shoot\ne.g. 1A");
+            System.out.println("First type a number to choose\nthe row (X) you will shoot\nThen type a letter to choose\nthe column (Y) you will shoot\ne.g. 1A");
+            System.out.println();
             String cmd0 = kb.nextLine();
             cmd0 = cmd0.toLowerCase();
-            
-            shootChar = cmd0.charAt(1);
-            System.out.println(shootChar);
-        
-            shootX = cmd0.charAt(1);
-            shootX -= 'a';
-            
-            //shootY = cmd0.charAt(0);
-            
-            System.out.println(shootX);
-            //System.out.println(shootY);
+            if (cmd0.length() == 2){
+                if (cmd0.charAt(0) >= '0' && cmd0.charAt(0) <= '9' && cmd0.charAt(1) >= 'a' && cmd0.charAt(1) <= 'j'){
+                    char shootChar = 'a';
+                    
+                    shootX = cmd0.charAt(0);
+                    shootX -= '0';
+                    
+                    shootChar = cmd0.charAt(1);
+                    shootY = cmd0.charAt(1);
+                    shootY -= 'a';
+                    
+                    if (playingBoardPlayer1[shootY][shootX] == shipChar[5]){
+                        playingBoardPlayer1[shootY][shootX] = shipChar[7];
+                        playingBoardPlayer1();
+                    }else {
+                        playingBoardPlayer1();
+                        System.out.println();
+                        System.out.println("NO!");
+                    }
+                }else System.out.println("NO!");
+            }else System.out.println("NO!");
         }
     }
     
@@ -268,6 +301,7 @@ public class Term2Project
         }
     }
     
+    //This tells the game what to do when the turn is ended for both players
     public void turnEnd(){
         while(shipLengthPrint==5){
             int i = 0;
@@ -289,7 +323,17 @@ public class Term2Project
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
                 player2Placing = false;//Check if player 2 can place ships
+                
+                
+                player2PlayingSetup = true;
+                playingBoardPlayer2();
+                player2PlayingSetup = false;
+                
+                player1PlayingSetup = true;
                 playingBoardPlayer1();
+                player1PlayingSetup = false;
+                
+                
                 shipShoot = true;//Check if the player can shoot ships
                 shipWeapon();//Start the ship shooting phase of the game
             }
