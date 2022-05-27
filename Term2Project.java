@@ -55,6 +55,10 @@ public class Term2Project
     int[] ship4P2FinalY = new int[5];
     int[] ship5P2FinalY = new int[5];
     
+    //Gunshot final pos on the board
+    int shootX = 0;
+    int shootY = 0;
+    
     int[] shipLengthArray = {2, 3, 3, 4, 5};//this tells the ships how long they can be
     int shipLengthAdd = 0;//This is used as an index into the ship length array
     int shipLengthPrint = 0;//This is used to check what ships can be printed onto the board
@@ -200,10 +204,22 @@ public class Term2Project
     //shipShoot is used copy the temporary ship positions to the final board configuration
     public void shipWeapon(){
         while(shipShoot){
+            char shootChar = 'a';
             System.out.println("Type coordinates to shoot");
             System.out.println("First type a number to choose the row you will shoot\nThen type a letter to choose the column you will shoot\ne.g. 1A");
             String cmd0 = kb.nextLine();
             cmd0 = cmd0.toLowerCase();
+            
+            shootChar = cmd0.charAt(1);
+            System.out.println(shootChar);
+        
+            shootX = cmd0.charAt(1);
+            shootX -= 'a';
+            
+            //shootY = cmd0.charAt(0);
+            
+            System.out.println(shootX);
+            //System.out.println(shootY);
         }
     }
     
