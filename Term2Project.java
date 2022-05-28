@@ -27,7 +27,7 @@ public class Term2Project
     String playingBoardPlayer1[][] = new String[COLS][ROWS];
     String playingBoardPlayer2[][] = new String[COLS][ROWS];
     
-    String[] shipChar = {"🛥 ","⛵ ","🚤 ","🚢 ","🛳 ","🌊 ","🕳 ","🔥 "};//All Special char's used
+    String[] shipChar = {"🛥 ","⛵ ","🚤 ","🚢 ","🛳 ","🌊 ","🕳 ","🔥 ","❌ "};//All Special char's used
     private char setupBoardChar = 'A';//Sets the char to the letter A
     
     int[] shipPosX = {0, 0, 0, 0, 0};//Ship movement on the X axis
@@ -232,26 +232,28 @@ public class Term2Project
             System.out.println();
             String cmd0 = kb.nextLine();
             cmd0 = cmd0.toLowerCase();
-            if (cmd0.length() == 2){
-                if (cmd0.charAt(0) >= '0' && cmd0.charAt(0) <= '9' && cmd0.charAt(1) >= 'a' && cmd0.charAt(1) <= 'j'){
-                    char shootChar = 'a';
-                    
-                    shootX = cmd0.charAt(0);
-                    shootX -= '0';
-                    
-                    shootChar = cmd0.charAt(1);
-                    shootY = cmd0.charAt(1);
-                    shootY -= 'a';
-                    
-                    if (playingBoardPlayer1[shootY][shootX] == shipChar[5]){
-                        playingBoardPlayer1[shootY][shootX] = shipChar[7];
-                        playingBoardPlayer1();
-                    }else {
+            if (cmd0.charAt(0) >= '0' && cmd0.charAt(0) <= '9' && cmd0.charAt(1) >= 'a' && cmd0.charAt(1) <= 'j' && cmd0.length() == 2){
+                char shootChar = 'a';
+                
+                shootX = cmd0.charAt(0);
+                shootX -= '0';
+                
+                shootChar = cmd0.charAt(1);
+                shootY = cmd0.charAt(1);
+                shootY -= 'a';
+                
+                for(int i=0;i<5;i++){
+                    if (placingBoardPlayer1[shootY][shootX] == shipChar[i]){
+                        //playingBoardPlayer1[shootY][shootX] = shipChar[7];
+                        //playingBoardPlayer1();
+                        System.out.println("YESS?");
+                    }else if(placingBoardPlayer1[shootY][shootX] == shipChar[5]){
+                        playingBoardPlayer1[shootY][shootX] = shipChar[8];
                         playingBoardPlayer1();
                         System.out.println();
-                        System.out.println("NO!");
-                    }
-                }else System.out.println("NO!");
+                        System.out.println("WATER");
+                    }else  System.out.println("NADA");
+                }
             }else System.out.println("NO!");
         }
     }
@@ -323,17 +325,12 @@ public class Term2Project
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
                 player2Placing = false;//Check if player 2 can place ships
-                
-                
                 player2PlayingSetup = true;
                 playingBoardPlayer2();
                 player2PlayingSetup = false;
-                
                 player1PlayingSetup = true;
                 playingBoardPlayer1();
                 player1PlayingSetup = false;
-                
-                
                 shipShoot = true;//Check if the player can shoot ships
                 shipWeapon();//Start the ship shooting phase of the game
             }
