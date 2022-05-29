@@ -13,12 +13,12 @@ public class Term2Project
     
     boolean shipMove = false;//Allows ships to move
     boolean shipShoot = false;//Allows ships to move
-    boolean player1PlayingSetup = false;
-    boolean player2PlayingSetup = false;
+    boolean player1PlayingSetup = false;//sets up the player 1 playing board by placing waves where they need to be
+    boolean player2PlayingSetup = false;//sets up the player 2 playing board by placing waves where they need to be
     boolean player1Placing = false;//Player 1 can place ships
     boolean player2Placing = false;//Player 2 can place ships
-    boolean player1Playing = false;//Player 1 can place ships
-    boolean player2Playing = false;//Player 2 can place ships
+    boolean player1Playing = false;//Player 1 can shoot ships
+    boolean player2Playing = false;//Player 2 can shoot ships
     
     private int ROWS = 10;//Sets how wide the grid is
     private int COLS = 10;//Sets how tall the grid is
@@ -223,41 +223,6 @@ public class Term2Project
         }
     } 
     
-    //shipShoot is used copy the temporary ship positions to the final board configuration
-    public void shipWeapon(){
-        while(shipShoot){
-            System.out.println();
-            System.out.println("Type coordinates to shoot");
-            System.out.println("First type a number to choose\nthe row (X) you will shoot\nThen type a letter to choose\nthe column (Y) you will shoot\ne.g. 1A");
-            System.out.println();
-            String cmd0 = kb.nextLine();
-            cmd0 = cmd0.toLowerCase();
-            if (cmd0.charAt(0) >= '0' && cmd0.charAt(0) <= '9' && cmd0.charAt(1) >= 'a' && cmd0.charAt(1) <= 'j' && cmd0.length() == 2){
-                char shootChar = 'a';
-                
-                shootX = cmd0.charAt(0);
-                shootX -= '0';
-                
-                shootChar = cmd0.charAt(1);
-                shootY = cmd0.charAt(1);
-                shootY -= 'a';
-                
-                for(int i=0;i<5;i++){
-                    if (placingBoardPlayer1[shootY][shootX] == shipChar[i]){
-                        //playingBoardPlayer1[shootY][shootX] = shipChar[7];
-                        //playingBoardPlayer1();
-                        System.out.println("YESS?");
-                    }else if(placingBoardPlayer1[shootY][shootX] == shipChar[5]){
-                        playingBoardPlayer1[shootY][shootX] = shipChar[8];
-                        playingBoardPlayer1();
-                        System.out.println();
-                        System.out.println("WATER");
-                    }else  System.out.println("NADA");
-                }
-            }else System.out.println("NO!");
-        }
-    }
-    
     //setFinalShipPos is used copy the temporary ship positions to the final board configuration
     public void setFinalShipPos(){
         if (player1Placing==true){
@@ -325,12 +290,16 @@ public class Term2Project
                 shipLengthAdd = 0;
                 shipLengthPrint = 0;
                 player2Placing = false;//Check if player 2 can place ships
+                
                 player2PlayingSetup = true;
                 playingBoardPlayer2();
                 player2PlayingSetup = false;
+                
                 player1PlayingSetup = true;
                 playingBoardPlayer1();
                 player1PlayingSetup = false;
+                
+                player1Playing = true;//Check if player 1 can shoot ships
                 shipShoot = true;//Check if the player can shoot ships
                 shipWeapon();//Start the ship shooting phase of the game
             }
@@ -361,5 +330,103 @@ public class Term2Project
         else canMoveT0 = true;
         if (shipPosY[0] + shipLengthArray[shipLengthAdd] -1 >= 10)canMoveT1 = false;
         else canMoveT1 = true;
+    }
+    
+    //shipShoot is used copy the temporary ship positions to the final board configuration
+    public void shipWeapon(){
+        while(shipShoot){
+            System.out.println("Type coordinates to shoot");
+            System.out.println("First type a number to choose\nthe row (X) you will shoot\nThen type a letter to choose\nthe column (Y) you will shoot\ne.g. 1A");
+            System.out.println();
+            String cmd0 = kb.nextLine();
+            cmd0 = cmd0.toLowerCase();
+            if (cmd0.length() == 2 && cmd0.charAt(0) >= '0' && cmd0.charAt(0) <= '9' && cmd0.charAt(1) >= 'a' && cmd0.charAt(1) <= 'j'){
+                char shootChar = 'a';
+                
+                shootX = cmd0.charAt(0);
+                shootX -= '0';
+                
+                shootChar = cmd0.charAt(1);
+                shootY = cmd0.charAt(1);
+                shootY -= 'a';
+                
+                if(player1Playing);
+                    
+                
+                //if(player2Playing)player2Shoot();
+            }else{
+                System.out.println('\u000C');
+                playingBoardPlayer1();
+                System.out.println("This is not a valid command");
+            }
+        }
+    }
+    
+    public void player1Shoot(){
+        if (placingBoardPlayer2[shootY][shootX] == shipChar[0]
+         || placingBoardPlayer2[shootY][shootX] == shipChar[1]
+         || placingBoardPlayer2[shootY][shootX] == shipChar[2]
+         || placingBoardPlayer2[shootY][shootX] == shipChar[3]
+         || placingBoardPlayer2[shootY][shootX] == shipChar[4])
+        {
+            playingBoardPlayer1[shootY][shootX] = shipChar[7];
+            playingBoardPlayer1();
+            String cmd1 = kb.nextLine();
+            cmd1 = cmd1.toLowerCase();
+            System.out.println("Type n or next to start player 2's turn");
+            if(cmd1 == "n"  || cmd1 == "next"){
+                player1Playing = false;//Check if player 1 can shoot ships
+                player2Playing = true;//Check if player 2 can shoot ships
+            }
+        }
+        if(placingBoardPlayer2[shootY][shootX] == shipChar[5]){
+            playingBoardPlayer1[shootY][shootX] = shipChar[8];
+            playingBoardPlayer1();
+            String cmd2 = kb.nextLine();
+            cmd2 = cmd2.toLowerCase();
+            System.out.println("next");
+            if(cmd2 == "n"  || cmd2 == "next"){
+                player1Playing = false;//Check if player 1 can shoot ships
+                player2Playing = true;//Check if player 2 can shoot ships
+            }
+        }else{
+            System.out.println('\u000C');
+            playingBoardPlayer1();
+            System.out.println("You cannot shoot here");
+        }
+    }
+    
+    public void player2Shoot(){
+        if (placingBoardPlayer1[shootY][shootX] == shipChar[0]
+         || placingBoardPlayer1[shootY][shootX] == shipChar[1]
+         || placingBoardPlayer1[shootY][shootX] == shipChar[2]
+         || placingBoardPlayer1[shootY][shootX] == shipChar[3]
+         || placingBoardPlayer1[shootY][shootX] == shipChar[4])
+        {
+            playingBoardPlayer2[shootY][shootX] = shipChar[7];
+            playingBoardPlayer2();
+            String cmd1 = kb.nextLine();
+            cmd1 = cmd1.toLowerCase();
+            System.out.println("Type n or next to start player 2's turn");
+            if(cmd1 == "n"  || cmd1 == "next"){
+                player2Playing = false;//Check if player 2 can shoot ships
+                player1Playing = true;//Check if player 1 can shoot ships
+            }
+        }
+        if(placingBoardPlayer1[shootY][shootX] == shipChar[5]){
+            playingBoardPlayer2[shootY][shootX] = shipChar[8];
+            playingBoardPlayer2();
+            String cmd2 = kb.nextLine();
+            cmd2 = cmd2.toLowerCase();
+            System.out.println("next");
+            if(cmd2 == "n"  || cmd2 == "next"){
+                player2Playing = false;//Check if player 2 can shoot ships
+                player1Playing = true;//Check if player 1 can shoot ships
+            }
+        }else{
+            System.out.println('\u000C');
+            playingBoardPlayer2();
+            System.out.println("You cannot shoot here");
+        }
     }
 }
