@@ -1,5 +1,5 @@
 /**
- * Write a description of class Term2Project here.
+ * Write a description of class printTest here.
  *
  * @author (Piper Inns Hall)
  * @version (19/05/22)
@@ -7,7 +7,7 @@
 
 //win condition if ship hit counter -1 if counter = 0 game win for other player
 import java.util.Scanner;
-public class Term2Project
+public class printTest
 {
     Scanner kb = new Scanner (System.in);//Initiates new scanner
     
@@ -79,9 +79,9 @@ public class Term2Project
     int winConditionP1 = 17;//Tells the game when player 1 has won
     int winConditionP2 = 17;//Tells the game when player 1 has won
     /**
-     * Constructor for objects of class Term2Project
+     * Constructor for objects of class printTest
      */
-    public Term2Project()//The main part of the game
+    public printTest()//The main part of the game
     {
         // initialise instance variables
         System.out.print("Welcome to ship-battle!\nType s or start to play");
@@ -112,7 +112,7 @@ public class Term2Project
                 if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer1[ship4P1FinalY[k]][ship4P1FinalX[k]] = shipChar[3];
                 if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer1[ship5P1FinalY[k]][ship5P1FinalX[k]] = shipChar[4];
                 //indicates where a ship will be placed
-                if(shipLengthPrint<=4 && shipLengthPrint > -1)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
+                if(shipLengthPrint<=4 && shipLengthPrint >  -1)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
                 System.out.print(placingBoardPlayer1[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
@@ -121,8 +121,10 @@ public class Term2Project
             System.out.println();
         }
         System.out.println("PLAYER 1 PLACING");//Tells the players who is placing
-        System.out.println(ship1P1FinalX[4]);
+        System.out.println();
         System.out.println("Type r,l,u,d or right,left,up,down\nto move a ship and press n to place a ship");
+        shipPlaceCollision();
+        System.out.println(canPlace);
     }
     
     //placingBoardPlayer2 is used to make the board where player 2's ships are placed
@@ -239,9 +241,17 @@ public class Term2Project
                 if(player1Placing)placingBoardPlayer1();
                 if(player2Placing)placingBoardPlayer2();
             }
-            if(cmd0.equals("next") && canPlace == true || cmd0.equals("n") && canPlace == true){
-                setFinalShipPos();
-            }else if(cmd0.equals("next") && canPlace == false|| cmd0.equals("n") && canPlace == false)System.out.println("Cannot place here");
+            if(cmd0.equals("next") || cmd0.equals("n")){
+                shipPlaceCollision();
+                if (canPlace == true){
+                    setFinalShipPos();
+                    canPlace = true;
+                }
+                else if (canPlace == false){
+                    System.out.println("Cannot place here");
+                    canPlace = true;
+                }
+            }
         }
     } 
     
@@ -342,19 +352,6 @@ public class Term2Project
     
     //shipCollision is used to check if a ship can be moved in a certain direction
     public void shipCollision(){
-        for(int i=0;i<5;i++){
-            if (
-            shipPosX[0] == ship1P1FinalX[i] ||
-            shipPosX[1] == ship1P1FinalX[i] ||
-            shipPosX[2] == ship1P1FinalX[i] ||
-            shipPosX[3] == ship1P1FinalX[i] ||
-            shipPosX[4] == ship1P1FinalX[i]
-            
-            ){
-                canPlace = false;
-                 break;
-            }else canPlace = true;
-        }
         if (shipPosX[0] - 1 <= -1)canMoveL = false;
         else canMoveL = true;
         if (shipPosX[shipLengthArray[shipLengthAdd]-1] + 1 >= 10)canMoveR = false;
@@ -367,6 +364,33 @@ public class Term2Project
         else canMoveT0 = true;
         if (shipPosY[0] + shipLengthArray[shipLengthAdd] -1 >= 10)canMoveT1 = false;
         else canMoveT1 = true;
+    }
+    
+    //shipPlaceCollision is used to check if a ship can be placed
+    public void shipPlaceCollision(){
+        boolean placeCheck = true;
+        if(
+            placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[5]||
+            placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[5]||
+            placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[5]||
+            placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[5]||
+            placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[5]
+        ){
+            placeCheck = true;
+        }
+        for(int i=0;i<4 ;i++){
+            if(
+                placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[i]||
+                placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[i]||
+                placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[i]||
+                placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[i]||
+                placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[i]
+            ){
+                placeCheck = false;
+            }
+        }
+        if (placeCheck = true) canPlace = true;
+        else if (placeCheck = false) canPlace = false;
     }
     
     //shipShoot is used copy the temporary ship positions to the final board configuration
