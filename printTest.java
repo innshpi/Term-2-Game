@@ -74,7 +74,6 @@ public class printTest
     boolean canMoveD = false;//Tells the ship if it can move down
     boolean canMoveT0 = false;//Tells the ship if it can turn horizontal
     boolean canMoveT1 = false;//Tells the ship if it can turn vertical
-    boolean canPlace = false;//Tells the ship if it can be placed
     
     int winConditionP1 = 17;//Tells the game when player 1 has won
     int winConditionP2 = 17;//Tells the game when player 1 has won
@@ -90,7 +89,6 @@ public class printTest
         if(cmd0.equals("s") || cmd0.equals("start")){
             player1Placing = true;//Check if player 1 can place ships
             shipMove = true;//Allows ships to move
-            canPlace = true;//Tells the ship if it can be placed
             placingBoardPlayer1();//Starts printing the board
             shipCtrl();//Starts moving the ships
             shipCollision();
@@ -123,8 +121,7 @@ public class printTest
         System.out.println("PLAYER 1 PLACING");//Tells the players who is placing
         System.out.println();
         System.out.println("Type r,l,u,d or right,left,up,down\nto move a ship and press n to place a ship");
-        shipPlaceCollision();
-        System.out.println(canPlace);
+        System.out.println(canPlace());
     }
     
     //placingBoardPlayer2 is used to make the board where player 2's ships are placed
@@ -196,60 +193,56 @@ public class printTest
     //shipCtrl is used to move all ships on the grid
     public void shipCtrl(){
         while (shipMove){
-            shipCollision();
-            String cmd0 = kb.nextLine();
-            cmd0 = cmd0.toLowerCase();
-            if(cmd0.equals("right") && canMoveR == true || cmd0.equals("r") && canMoveR == true){
-                shipCollision();
-                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]++;
-                if(player1Placing)placingBoardPlayer1();
-                if(player2Placing)placingBoardPlayer2();
+            String cmd0 = kb.nextLine();//makes new textbox
+            cmd0 = cmd0.toLowerCase();//makes textbox lowercase
+            if(cmd0.equals("right") && canMoveR == true || cmd0.equals("r") && canMoveR == true){//if cmd = r move right
+                shipCollision();//starts checking if the ships are hitting the walls
+                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]++;//move all pos of ship
+                if(player1Placing)placingBoardPlayer1();//if player 1 change player 1 board
+                if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            if(cmd0.equals("left") && canMoveL == true || cmd0.equals("l") && canMoveL == true){
-                shipCollision();
-                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]--;
-                if(player1Placing)placingBoardPlayer1();
-                if(player2Placing)placingBoardPlayer2();
+            if(cmd0.equals("left") && canMoveL == true || cmd0.equals("l") && canMoveL == true){//if cmd = l move left
+                shipCollision();//starts checking if the ships are hitting the walls
+                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]--;//move all pos of ship
+                if(player1Placing)placingBoardPlayer1();//if player 1 change player 1 board
+                if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            if(cmd0.equals("up") && canMoveU == true || cmd0.equals("u") && canMoveU == true){
-                shipCollision();
-                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]--;
-                if(player1Placing)placingBoardPlayer1();
-                if(player2Placing)placingBoardPlayer2();
+            if(cmd0.equals("up") && canMoveU == true || cmd0.equals("u") && canMoveU == true){//if cmd = u move up
+                shipCollision();//starts checking if the ships are hitting the walls
+                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]--;//move all pos of ship
+                if(player1Placing)placingBoardPlayer1();//if player 1 change player 1 board
+                if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            if(cmd0.equals("down") && canMoveD == true || cmd0.equals("d") && canMoveD == true){
-                shipCollision();
-                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]++;
-                if(player1Placing)placingBoardPlayer1();
-                if(player2Placing)placingBoardPlayer2();
+            if(cmd0.equals("down") && canMoveD == true || cmd0.equals("d") && canMoveD == true){//if cmd = d move down
+                shipCollision();//starts checking if the ships are hitting the walls
+                for(int i=0;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]++;//move all pos of ship
+                if(player1Placing)placingBoardPlayer1();//if player 1 chnage player 1 board
+                if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            if(cmd0.equals("turn") && shipTurn == 0 && canMoveT0 == true || cmd0.equals("t") && shipTurn == 0 && canMoveT0  == true){
-                shipCollision();
-                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]+=i;
-                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]-=i;
-                cmd0 = " ";
-                shipTurn = 1;
-                if(player1Placing)placingBoardPlayer1();
-                if(player2Placing)placingBoardPlayer2();
+            if(cmd0.equals("turn") && shipTurn == 0 && canMoveT0 == true || cmd0.equals("t") && shipTurn == 0 && canMoveT0  == true){//if cmd = t turn
+                shipCollision();//starts checking if the ships are hitting the walls
+                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]+=i;//turn all pos of ship
+                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]-=i;//turn all pos of ship
+                cmd0 = " ";//reset textbox
+                shipTurn = 1;//set ship turn state
+                if(player1Placing)placingBoardPlayer1();//if player 1 chnage player 1 board
+                if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            if(cmd0.equals("turn") && shipTurn == 1 && canMoveT1 == true || cmd0.equals("t") && shipTurn == 1 && canMoveT1 == true){
-                shipCollision();
-                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]-=i;
-                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]+=i;
-                cmd0 = " ";
-                shipTurn = 0;
-                if(player1Placing)placingBoardPlayer1();
-                if(player2Placing)placingBoardPlayer2();
+            if(cmd0.equals("turn") && shipTurn == 1 && canMoveT1 == true || cmd0.equals("t") && shipTurn == 1 && canMoveT1 == true){//if cmd = t turn
+                shipCollision();//starts checking if the ships are hitting the walls
+                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosX[i]-=i;//turn all pos of ship
+                for(int i=1;i<shipLengthArray[shipLengthAdd];i++)shipPosY[i]+=i;//turn all pos of ship
+                cmd0 = " ";//reset textbox
+                shipTurn = 0;//set ship turn state
+                if(player1Placing)placingBoardPlayer1();//if player 1 chnage player 1 board
+                if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            if(cmd0.equals("next") || cmd0.equals("n")){
-                shipPlaceCollision();
-                if (canPlace == true){
-                    setFinalShipPos();
-                    canPlace = true;
+            if(cmd0.equals("next") || cmd0.equals("n")){//place ships
+                if (canPlace()){//if the ship is not colliding
+                    setFinalShipPos();//place ship
                 }
-                else if (canPlace == false){
-                    System.out.println("Cannot place here");
-                    canPlace = true;
+                else{//otherwise
+                    System.out.println("Cannot place here");//dont place
                 }
             }
         }
@@ -257,55 +250,53 @@ public class printTest
     
     //setFinalShipPos is used copy the temporary ship positions to the final board configuration
     public void setFinalShipPos(){
-        if (player1Placing==true){
-            shipLengthPrint++;
-            if(shipLengthAdd<4)shipLengthAdd++;
-            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P1FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P1FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P1FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P1FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P1FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P1FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P1FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P1FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P1FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P1FinalY[i] = shipPosY[i];
-            for(int i=0;i<5;i++)shipPosX[i] = 0;
-            for(int i=0;i<5;i++)shipPosY[i] = i;
-            shipTurn = 0;
-            placingBoardPlayer1();
-            shipCollision();
-            if(shipLengthPrint==5){
-                turnEnd();
+        if (player1Placing==true){//if you are playing as player 1
+            shipLengthPrint++;//checks what ship you are placing
+            if(shipLengthAdd<4)shipLengthAdd++;//This is used as an index into the ship length array
+            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P1FinalX[i] = shipPosX[i];//sets ship 1 pos on the final board
+            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P1FinalY[i] = shipPosY[i];//sets ship 1 pos on the final board
+            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P1FinalX[i] = shipPosX[i];//sets ship 2 pos on the final board
+            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P1FinalY[i] = shipPosY[i];//sets ship 2 pos on the final board
+            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P1FinalX[i] = shipPosX[i];//sets ship 3 pos on the final board
+            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P1FinalY[i] = shipPosY[i];//sets ship 3 pos on the final board
+            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P1FinalX[i] = shipPosX[i];//sets ship 4 pos on the final board
+            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P1FinalY[i] = shipPosY[i];//sets ship 4 pos on the final board
+            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P1FinalX[i] = shipPosX[i];//sets ship 5 pos on the final board
+            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P1FinalY[i] = shipPosY[i];//sets ship 5 pos on the final board
+            for(int i=0;i<5;i++)shipPosX[i] = 0;//reset ships position on the gameboard 
+            for(int i=0;i<5;i++)shipPosY[i] = i;//reset ships position on the gameboard 
+            shipTurn = 0;//resets the ship turn state
+            placingBoardPlayer1();//prints player 1's board
+            if(shipLengthPrint==5){//when the final ship is placed
+                turnEnd();//go to next players turn
             }
-        }else if (player2Placing==true){
-            shipLengthPrint++;
-            if(shipLengthAdd<4)shipLengthAdd++;
-            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P2FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P2FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P2FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P2FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P2FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P2FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P2FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P2FinalY[i] = shipPosY[i];
-            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P2FinalX[i] = shipPosX[i];
-            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P2FinalY[i] = shipPosY[i];
-            for(int i=0;i<5;i++)shipPosX[i] = 0;
-            for(int i=0;i<5;i++)shipPosY[i] = i;
-            shipTurn = 0;
-            placingBoardPlayer2();
-            shipCollision();
-            if(shipLengthPrint==5){
-                turnEnd();
+        }else if (player2Placing==true){//if you are playing as player 2
+            shipLengthPrint++;//checks what ship you are placing
+            if(shipLengthAdd<4)shipLengthAdd++;//This is used as an index into the ship length array
+            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P2FinalX[i] = shipPosX[i];//sets ship 1 pos on the final board
+            if(shipLengthPrint==1)for(int i=0;i<2;i++)ship1P2FinalY[i] = shipPosY[i];//sets ship 1 pos on the final board
+            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P2FinalX[i] = shipPosX[i];//sets ship 2 pos on the final board
+            if(shipLengthPrint==2)for(int i=0;i<3;i++)ship2P2FinalY[i] = shipPosY[i];//sets ship 2 pos on the final board
+            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P2FinalX[i] = shipPosX[i];//sets ship 3 pos on the final board
+            if(shipLengthPrint==3)for(int i=0;i<3;i++)ship3P2FinalY[i] = shipPosY[i];//sets ship 3 pos on the final board
+            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P2FinalX[i] = shipPosX[i];//sets ship 4 pos on the final board
+            if(shipLengthPrint==4)for(int i=0;i<4;i++)ship4P2FinalY[i] = shipPosY[i];//sets ship 4 pos on the final board
+            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P2FinalX[i] = shipPosX[i];//sets ship 5 pos on the final board
+            if(shipLengthPrint==5)for(int i=0;i<5;i++)ship5P2FinalY[i] = shipPosY[i];//sets ship 5 pos on the final board
+            for(int i=0;i<5;i++)shipPosX[i] = 0;//reset ships position on the gameboard 
+            for(int i=0;i<5;i++)shipPosY[i] = i;//reset ships position on the gameboard 
+            shipTurn = 0;//resets the ship turn state
+            placingBoardPlayer2();//prints player 2's board
+            if(shipLengthPrint==5){//when the final ship is placed
+                turnEnd();//go to next players turn
             }
         }
     }
     
     //This tells the game what to do when the turn is ended for both players
     public void turnEnd(){
-        while(shipLengthPrint==5){
-            int i = 0;
+        while(shipLengthPrint==5){//check if all ships have been placed
+            int i = 0;//playername
             if(player1Placing)i=1;
             if(player2Placing)i=2;
             System.out.println("Is this where you would like to\nplace your ships, PLAYER " + i);
@@ -313,38 +304,38 @@ public class printTest
             System.out.println("If NO, type N and press RETURN");
             String cmd0 = kb.nextLine();
             cmd0 = cmd0.toLowerCase();
-            if(cmd0.equals("y") && player1Placing){
-                shipLengthAdd = 0;
-                shipLengthPrint = 0;
+            if(cmd0.equals("y") && player1Placing){//if you do place your ships
+                shipLengthAdd = 0;//reset ship length index plugin
+                shipLengthPrint = 0;//reset ship length checker
                 placingBoardPlayer2();
                 player1Placing = false;//Check if player 1 can place ships
                 player2Placing = true;//Check if player 2 can place ships
             }
-            else if(cmd0.equals("y") && player2Placing){
-                shipLengthAdd = 0;
-                shipLengthPrint = 0;
+            else if(cmd0.equals("y") && player2Placing){//if you do place your ships
+                shipLengthAdd = 0;//reset ship length index plugin
+                shipLengthPrint = 0;//reset ship length checker
                 player2Placing = false;//Check if player 2 can place ships
                 
                 player2PlayingSetup = true;
-                playingBoardPlayer2();
+                playingBoardPlayer2();//setup player 2 playing board
                 player2PlayingSetup = false;
                 
                 player1PlayingSetup = true;
-                playingBoardPlayer1();
+                playingBoardPlayer1();//setup player 1 playing board
                 player1PlayingSetup = false;
                 
                 player1Playing = true;//Check if player 1 can shoot ships
                 shipShoot = true;//Check if the player can shoot ships
                 shipWeapon();//Start the ship shooting phase of the game
             }
-            if(cmd0.equals("n") && player1Placing){
-                shipLengthAdd = 0;
-                shipLengthPrint = 0;
+            if(cmd0.equals("n") && player1Placing){//if you don't place your ships
+                shipLengthAdd = 0;//reset ship length index plugin
+                shipLengthPrint = 0;//reset ship length checker
                 placingBoardPlayer1();shipCollision();
             }
-            else if(cmd0.equals("n") && player2Placing){
-                shipLengthAdd = 0;
-                shipLengthPrint = 0;
+            else if(cmd0.equals("n") && player2Placing){//if you don't place your ships
+                shipLengthAdd = 0;//reset ship length index plugin
+                shipLengthPrint = 0;//reset ship length checker
                 placingBoardPlayer2();
             }
         }
@@ -352,45 +343,33 @@ public class printTest
     
     //shipCollision is used to check if a ship can be moved in a certain direction
     public void shipCollision(){
-        if (shipPosX[0] - 1 <= -1)canMoveL = false;
+        if (shipPosX[0] - 1 <= -1)canMoveL = false;//if hittting l wall
         else canMoveL = true;
-        if (shipPosX[shipLengthArray[shipLengthAdd]-1] + 1 >= 10)canMoveR = false;
+        if (shipPosX[shipLengthArray[shipLengthAdd]-1] + 1 >= 10)canMoveR = false;//if hittting r wall
         else canMoveR = true;
-        if (shipPosY[0] - 1 <= -1)canMoveU = false;
+        if (shipPosY[0] - 1 <= -1)canMoveU = false;//if hittting uwall
         else canMoveU = true;
-        if (shipPosY[shipLengthArray[shipLengthAdd]-1] + 1 >= 10)canMoveD = false;
+        if (shipPosY[shipLengthArray[shipLengthAdd]-1] + 1 >= 10)canMoveD = false;//if hittting d wall
         else canMoveD = true;
-        if (shipPosX[0] + shipLengthArray[shipLengthAdd] -1 >= 10)canMoveT0 = false;
+        if (shipPosX[0] + shipLengthArray[shipLengthAdd] -1 >= 10)canMoveT0 = false;//if hittting r wall
         else canMoveT0 = true;
-        if (shipPosY[0] + shipLengthArray[shipLengthAdd] -1 >= 10)canMoveT1 = false;
+        if (shipPosY[0] + shipLengthArray[shipLengthAdd] -1 >= 10)canMoveT1 = false;//if hittting d wall
         else canMoveT1 = true;
     }
     
     //shipPlaceCollision is used to check if a ship can be placed
-    public void shipPlaceCollision(){
-        boolean placeCheck = true;
-        if(
-            placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[5]||
-            placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[5]||
-            placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[5]||
-            placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[5]||
-            placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[5]
-        ){
-            placeCheck = true;
-        }
-        for(int i=0;i<4 ;i++){
+    public boolean canPlace(){
+        boolean canPlaceOk = true;
+        for(int i=0;i<5;i++){ //check each ship image
             if(
                 placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[i]||
                 placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[i]||
                 placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[i]||
                 placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[i]||
                 placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[i]
-            ){
-                placeCheck = false;
-            }
+            ) {canPlaceOk = false; System.out.println(shipChar[i]);}
         }
-        if (placeCheck = true) canPlace = true;
-        else if (placeCheck = false) canPlace = false;
+        return canPlaceOk;
     }
     
     //shipShoot is used copy the temporary ship positions to the final board configuration
@@ -538,7 +517,6 @@ public class printTest
             shipLengthAdd = 0;//This is used as an index into the ship length array
             shipLengthPrint = 0;//This is used to check what ships can be printed onto the board
             shipTurn = 0;//Tells the ship what direction it can turn
-            canPlace = true;//Tells the ship if it can be placed
             winConditionP1 = 17;//Tells the game when player 1 has won
             winConditionP2 = 17;//Tells the game when player 1 has won
         }
