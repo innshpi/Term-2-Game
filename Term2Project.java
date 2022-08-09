@@ -104,7 +104,7 @@ public class Term2Project
             for(int j=0;j<ROWS;j++){//prints board rows
                 placingBoardPlayer1[i][j] = shipChar[5];//places wave emoji onto the board
                 if(shipLengthPrint>=1)for(int k=0;k<shipLengthArray[0];k++)placingBoardPlayer1[ship1P1FinalY[k]][ship1P1FinalX[k]] = shipChar[0];
-                if(shipLengthPrint>=2)for(int k=0;k<shipLengthArray[1];k++)placingBoardPlayer1[ship2P1FinalY[k]][ship2P1FinalX[k]] = shipChar[1];
+                if(shipLengthPrint>=2)for(int  k=0;k<shipLengthArray[1];k++)placingBoardPlayer1[ship2P1FinalY[k]][ship2P1FinalX[k]] = shipChar[1];
                 if(shipLengthPrint>=3)for(int k=0;k<shipLengthArray[2];k++)placingBoardPlayer1[ship3P1FinalY[k]][ship3P1FinalX[k]] = shipChar[2];
                 if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer1[ship4P1FinalY[k]][ship4P1FinalX[k]] = shipChar[3];
                 if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer1[ship5P1FinalY[k]][ship5P1FinalX[k]] = shipChar[4];
@@ -121,8 +121,9 @@ public class Term2Project
         System.out.println();
         System.out.println("Type r,l,u,d or right,left,up,down\nto move a ship and press n to place a ship");
         System.out.println(canPlace());
-        System.out.println(placingBoardPlayer1[shipPosX[0]][shipPosY[0]]);
         System.out.println(shipPosX[0]);
+        System.out.println(shipPosY [0]);
+        System.out.println(placingBoardPlayer1[shipPosY[0]][shipPosX[0]]);
     }
     
     //placingBoardPlayer2 is used to make the board where player 2's ships are placed
@@ -366,13 +367,24 @@ public class Term2Project
     public boolean canPlace(){
         boolean canPlaceOk = true;
         for(int i=0;i<5;i++){ //check each ship image
-            if(
-                placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[i]||
-                placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[i]||
-                placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[i]||
-                placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[i]||
-                placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[i]
-            ) {canPlaceOk = false;}
+            // if(
+                // placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[i]||
+                // placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[i]||
+                // placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[i]||
+                // placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[i]||
+                // placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[i]
+            // ) 
+            // {canPlaceOk = false;}
+            
+            if(shipPosX[i] == 0 && shipPosY[i] == 0);
+            //i=0,i<shiplength
+            
+            
+            
+            
+            
+            
+            
         }
         return canPlaceOk;
     }
