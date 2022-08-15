@@ -34,29 +34,29 @@ public class Term2Project
     int[] shipPosY = {0, 1, 2, 3, 4};//Ship movement on the Y axis
     
     //Ship final pos on the board for player 1
-    int[] ship1P1FinalX = new int[5];
-    int[] ship2P1FinalX = new int[5];
-    int[] ship3P1FinalX = new int[5];
-    int[] ship4P1FinalX = new int[5];
+    int[] ship1P1FinalX = new int[2];
+    int[] ship2P1FinalX = new int[3];
+    int[] ship3P1FinalX = new int[3];
+    int[] ship4P1FinalX = new int[4];
     int[] ship5P1FinalX = new int[5];
     
-    int[] ship1P1FinalY = new int[5];
-    int[] ship2P1FinalY = new int[5];
-    int[] ship3P1FinalY = new int[5];
-    int[] ship4P1FinalY = new int[5];
+    int[] ship1P1FinalY = new int[2];
+    int[] ship2P1FinalY = new int[3];
+    int[] ship3P1FinalY = new int[3];
+    int[] ship4P1FinalY = new int[4];
     int[] ship5P1FinalY = new int[5];
     
     //Ship final pos on the board for player 2
-    int[] ship1P2FinalX = new int[5];
-    int[] ship2P2FinalX = new int[5];
-    int[] ship3P2FinalX = new int[5];
-    int[] ship4P2FinalX = new int[5];
+    int[] ship1P2FinalX = new int[2];
+    int[] ship2P2FinalX = new int[3];
+    int[] ship3P2FinalX = new int[3];
+    int[] ship4P2FinalX = new int[4];
     int[] ship5P2FinalX = new int[5];
     
-    int[] ship1P2FinalY = new int[5];
-    int[] ship2P2FinalY = new int[5];
-    int[] ship3P2FinalY = new int[5];
-    int[] ship4P2FinalY = new int[5];
+    int[] ship1P2FinalY = new int[2];
+    int[] ship2P2FinalY = new int[3];
+    int[] ship3P2FinalY = new int[3];
+    int[] ship4P2FinalY = new int[4];
     int[] ship5P2FinalY = new int[5];
     
     //Gunshot final pos on the board
@@ -75,8 +75,23 @@ public class Term2Project
     boolean canMoveT0 = false;//Tells the ship if it can turn horizontal
     boolean canMoveT1 = false;//Tells the ship if it can turn vertical
     
-    int winConditionP1 = 17;//Tells the game when player 1 has won
-    int winConditionP2 = 17;//Tells the game when player 1 has won
+    int[] shipP1Sink = {0, 0, 0, 0, 0};
+    int[] shipP2Sink = {0, 0, 0, 0, 0};
+    
+    int s1P1Hit = 2;
+    int s2P1Hit = 3;
+    int s3P1Hit = 3;
+    int s4P1Hit = 4;
+    int s5P1Hit = 5;
+    
+    int s1P2Hit = 2;
+    int s2P2Hit = 3;
+    int s3P2Hit = 3;
+    int s4P2Hit = 4;
+    int s5P2Hit = 5;
+    
+    int winConditionP1 = 1;//Tells the game when player 1 has won
+    int winConditionP2 = 17;//Tells the game when player 2 has won
     /**
      * Constructor for objects of class printTest
      */
@@ -84,18 +99,23 @@ public class Term2Project
     {
         // initialise instance variables
         System.out.print("Welcome to ship-battle!\nType s or start to play");
-        String cmd0 = kb.nextLine();
-        cmd0 = cmd0.toLowerCase();
-        if(cmd0.equals("s") || cmd0.equals("start")){
-            player1Placing = true;//Check if player 1 can place ships
-            shipMove = true;//Allows ships to move
-            placingBoardPlayer1();//Starts printing the board
-            shipCtrl();//Starts moving the ships
+        boolean menu = true;
+        while (menu){
+            String cmd0 = kb.nextLine();
+            cmd0 = cmd0.toLowerCase();
+            if(cmd0.equals("s") || cmd0.equals("start")){
+                menu = false;
+                player1Placing = true;//Check if player 1 can place ships
+                shipMove = true;//Allows ships to move
+                placingBoardPlayer1();//Starts printing the board
+                shipCtrl();//Starts moving the ships
+            }
         }
     }
     
     //placingBoardPlayer1 is used to make the board where player 1's ships are placed
     public void placingBoardPlayer1(){
+        canPlace();
         System.out.print('\u000C');//clears the screen
         for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
         System.out.println();
@@ -104,12 +124,13 @@ public class Term2Project
             for(int j=0;j<ROWS;j++){//prints board rows
                 placingBoardPlayer1[i][j] = shipChar[5];//places wave emoji onto the board
                 if(shipLengthPrint>=1)for(int k=0;k<shipLengthArray[0];k++)placingBoardPlayer1[ship1P1FinalY[k]][ship1P1FinalX[k]] = shipChar[0];
-                if(shipLengthPrint>=2)for(int  k=0;k<shipLengthArray[1];k++)placingBoardPlayer1[ship2P1FinalY[k]][ship2P1FinalX[k]] = shipChar[1];
+                if(shipLengthPrint>=2)for(int k=0;k<shipLengthArray[1];k++)placingBoardPlayer1[ship2P1FinalY[k]][ship2P1FinalX[k]] = shipChar[1];
                 if(shipLengthPrint>=3)for(int k=0;k<shipLengthArray[2];k++)placingBoardPlayer1[ship3P1FinalY[k]][ship3P1FinalX[k]] = shipChar[2];
                 if(shipLengthPrint>=4)for(int k=0;k<shipLengthArray[3];k++)placingBoardPlayer1[ship4P1FinalY[k]][ship4P1FinalX[k]] = shipChar[3];
                 if(shipLengthPrint>=5)for(int k=0;k<shipLengthArray[4];k++)placingBoardPlayer1[ship5P1FinalY[k]][ship5P1FinalX[k]] = shipChar[4];
                 //indicates where a ship will be placed
                 if(shipLengthPrint<=4 && shipLengthPrint >  -1)for(int l=0;l<shipLengthArray[shipLengthAdd];l++)placingBoardPlayer1[shipPosY[l]][shipPosX[l]] = shipChar[6];
+                //place player on the board
                 System.out.print(placingBoardPlayer1[i][j]);//prints out everything placed on the board
             }
             System.out.print(setupBoardChar + "\u3002");//print character onto the right of the board
@@ -120,14 +141,11 @@ public class Term2Project
         System.out.println("PLAYER 1 PLACING");//Tells the players who is placing
         System.out.println();
         System.out.println("Type r,l,u,d or right,left,up,down\nto move a ship and press n to place a ship");
-        System.out.println(canPlace());
-        System.out.println(shipPosX[0]);
-        System.out.println(shipPosY [0]);
-        System.out.println(placingBoardPlayer1[shipPosY[0]][shipPosX[0]]);
     }
     
     //placingBoardPlayer2 is used to make the board where player 2's ships are placed
     public void placingBoardPlayer2(){
+        canPlace();
         System.out.print('\u000C');//clears the screen
         for(int i=0;i<COLS;i++)System.out.print(i + "\u3002");//prints out the numbers above the board
         System.out.println();
@@ -240,16 +258,13 @@ public class Term2Project
                 if(player1Placing)placingBoardPlayer1();//if player 1 chnage player 1 board
                 if(player2Placing)placingBoardPlayer2();//if player 2 change player 2 board
             }
-            /*if(cmd0.equals("next") || cmd0.equals("n")){//place ships
+            if(cmd0.equals("next") || cmd0.equals("n")){//place ships
                 if (canPlace()){//if the ship is not colliding
                     setFinalShipPos();//place ship
                 }
-                else{//otherwise
+                else if(!canPlace()){//otherwise
                     System.out.println("Cannot place here");//dont place
                 }
-            }*/
-            if(cmd0.equals("next") || cmd0.equals("n")){
-                setFinalShipPos();
             }
         }
     } 
@@ -365,29 +380,44 @@ public class Term2Project
     
     //shipPlaceCollision is used to check if a ship can be placed
     public boolean canPlace(){
-        boolean canPlaceOk = true;
-        for(int i=0;i<5;i++){ //check each ship image
-            // if(
-                // placingBoardPlayer1[shipPosX[0]][shipPosY[0]] == shipChar[i]||
-                // placingBoardPlayer1[shipPosX[1]][shipPosY[1]] == shipChar[i]||
-                // placingBoardPlayer1[shipPosX[2]][shipPosY[2]] == shipChar[i]||
-                // placingBoardPlayer1[shipPosX[3]][shipPosY[3]] == shipChar[i]||
-                // placingBoardPlayer1[shipPosX[4]][shipPosY[4]] == shipChar[i]
-            // ) 
-            // {canPlaceOk = false;}
-            
-            if(shipPosX[i] == 0 && shipPosY[i] == 0);
-            //i=0,i<shiplength
-            
-            
-            
-            
-            
-            
-            
+        boolean canPlace = true;
+        for(int i=0;i<2;i++){
+            //player 1 - ship 1 collisions
+            if (shipLengthPrint==1)for(int j=0;j<3;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+            //player 2 - ship 1 collisions
+            if (shipLengthPrint==1)for(int j=0;j<3;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+        }    
+        for(int i=0;i<3;i++){
+            //player 1 - ship 2 collisions
+            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+            //player 1 - ship 3 collisions
+            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship3P1FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship3P1FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+            //player 2 - ship 2 collisions
+            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+            //player 2 - ship 3 collisions
+            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship3P2FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship3P2FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
         }
-        return canPlaceOk;
+        for(int i=0;i<4;i++){
+            //player 1 - ship 4 collisions
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship4P1FinalX[i]==shipPosX[j] && ship4P1FinalY[i]==shipPosY[j])canPlace = false;}
+            //player 2 - ship 4 collisions
+            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship4P1FinalX[i]==shipPosX[j] && ship4P1FinalY[i]==shipPosY[j])canPlace = false;}
+        }
+        return canPlace;
     }
+    
     
     //shipShoot is used copy the temporary ship positions to the final board configuration
     public void shipWeapon(){
@@ -408,8 +438,18 @@ public class Term2Project
                 shootY = cmd0.charAt(1);
                 shootY -= 'a';
                 
-                if(player1Playing)player1Shoot();
-                if(player2Playing)player2Shoot();
+                if(
+                playingBoardPlayer1[shootY][shootX] == shipChar[5] && player1Playing ||
+                playingBoardPlayer2[shootY][shootX] == shipChar[5] && player2Playing){
+                    if(player1Playing)player1Shoot();
+                    if(player2Playing)player2Shoot();
+                }
+                else{
+                    System.out.println('\u000C');
+                    playingBoardPlayer1();
+                    System.out.println("This is not a valid command");
+                    System.out.println();
+                }
             }else{
                 System.out.println('\u000C');
                 playingBoardPlayer1();
@@ -426,20 +466,31 @@ public class Term2Project
          || placingBoardPlayer2[shootY][shootX] == shipChar[2]
          || placingBoardPlayer2[shootY][shootX] == shipChar[3]
          || placingBoardPlayer2[shootY][shootX] == shipChar[4]){
+            winConditionP1--;
             System.out.println('\u000C');
             playingBoardPlayer1[shootY][shootX] = shipChar[7];
+            sink1Ship();
+            if(shipP1Sink[0] == 1)for(int i=0;i<shipLengthArray[0];i++)playingBoardPlayer1[ship1P2FinalY[i]][ship1P2FinalX[i]] = shipChar[0];
+            if(shipP1Sink[1] == 1)for(int i=0;i<shipLengthArray[1];i++)playingBoardPlayer1[ship2P2FinalY[i]][ship2P2FinalX[i]] = shipChar[1];
+            if(shipP1Sink[2] == 1)for(int i=0;i<shipLengthArray[2];i++)playingBoardPlayer1[ship3P2FinalY[i]][ship3P2FinalX[i]] = shipChar[2];
+            if(shipP1Sink[3] == 1)for(int i=0;i<shipLengthArray[3];i++)playingBoardPlayer1[ship4P2FinalY[i]][ship4P2FinalX[i]] = shipChar[3];
+            if(shipP1Sink[4] == 1)for(int i=0;i<shipLengthArray[4];i++)playingBoardPlayer1[ship5P2FinalY[i]][ship5P2FinalX[i]] = shipChar[4];
             playingBoardPlayer1();
             System.out.println();
             System.out.println("Type n or next to start player 2's turn");
-            String cmd1 = kb.nextLine();
-            cmd1 = cmd1.toLowerCase();
-            if(cmd1.equals("n") || cmd1.equals("next")){
-                player1Playing = false;//Check if player 1 can shoot ships
-                player2Playing = true;//Check if player 2 can shoot ships
-                System.out.println('\u000C');
-                playingBoardPlayer2();
-                shipWeapon();
-                winConditionP1--;
+            System.out.println(s1P1Hit);
+            boolean cmdN = true;
+            while (cmdN){
+                String cmd1 = kb.nextLine();
+                cmd1 = cmd1.toLowerCase();
+                if(cmd1.equals("n") || cmd1.equals("next")){
+                    cmdN = false;
+                    player1Playing = false;//Check if player 1 can shoot ships
+                    player2Playing = true;//Check if player 2 can shoot ships
+                    System.out.println('\u000C');
+                    playingBoardPlayer2();
+                    shipWeapon();
+                }
             }
         }else if(placingBoardPlayer2[shootY][shootX] == shipChar[5]){
             System.out.println('\u000C');
@@ -447,19 +498,19 @@ public class Term2Project
             playingBoardPlayer1();
             System.out.println();
             System.out.println("Type n or next to start player 2's turn");
-            String cmd2 = kb.nextLine();
-            cmd2 = cmd2.toLowerCase();
-            if(cmd2.equals("n") || cmd2.equals("next")){
-                player1Playing = false;//Check if player 1 can shoot ships
-                player2Playing = true;//Check if player 2 can shoot ships
-                System.out.println('\u000C');
-                playingBoardPlayer2();
-                shipWeapon();
+            boolean cmdN = true;
+            while (cmdN){
+                String cmd2 = kb.nextLine();
+                cmd2 = cmd2.toLowerCase();
+                if(cmd2.equals("n") || cmd2.equals("next")){
+                    cmdN = false;
+                    player1Playing = false;//Check if player 1 can shoot ships
+                    player2Playing = true;//Check if player 2 can shoot ships
+                    System.out.println('\u000C');
+                    playingBoardPlayer2();
+                    shipWeapon();
+                }
             }
-        }else{
-            System.out.println('\u000C');
-            playingBoardPlayer1();
-            System.out.println("You cannot shoot here");
         }
     }
     
@@ -471,71 +522,76 @@ public class Term2Project
          || placingBoardPlayer1[shootY][shootX] == shipChar[2]
          || placingBoardPlayer1[shootY][shootX] == shipChar[3]
          || placingBoardPlayer1[shootY][shootX] == shipChar[4]){
+            winConditionP2--;
             System.out.println('\u000C');
             playingBoardPlayer2[shootY][shootX] = shipChar[7];
+            sink2Ship();
+            if(shipP2Sink[0] == 1)for(int i=0;i<shipLengthArray[0];i++)playingBoardPlayer2[ship1P2FinalY[i]][ship1P2FinalX[i]] = shipChar[0];
+            if(shipP2Sink[1] == 1)for(int i=0;i<shipLengthArray[1];i++)playingBoardPlayer2[ship2P2FinalY[i]][ship2P2FinalX[i]] = shipChar[1];
+            if(shipP2Sink[2] == 1)for(int i=0;i<shipLengthArray[2];i++)playingBoardPlayer2[ship3P2FinalY[i]][ship3P2FinalX[i]] = shipChar[2];
+            if(shipP2Sink[3] == 1)for(int i=0;i<shipLengthArray[3];i++)playingBoardPlayer2[ship4P2FinalY[i]][ship4P2FinalX[i]] = shipChar[3];
+            if(shipP2Sink[4] == 1)for(int i=0;i<shipLengthArray[4];i++)playingBoardPlayer2[ship5P2FinalY[i]][ship5P2FinalX[i]] = shipChar[4];
             playingBoardPlayer2();
             System.out.println();
             System.out.println("Type n or next to start player 1's turn");
-            String cmd1 = kb.nextLine();
-            cmd1 = cmd1.toLowerCase();
-            if(cmd1.equals("n") || cmd1.equals("next")){
-                player2Playing = false;//Check if player 2 can shoot ships
-                player1Playing = true;//Check if player 1 can shoot ships
-                System.out.println('\u000C');
-                playingBoardPlayer1();
-                shipWeapon();
-                winConditionP2--;
+            boolean cmdN = true;
+            while (cmdN){
+                String cmd1 = kb.nextLine();
+                cmd1 = cmd1.toLowerCase();
+                if(cmd1.equals("n") || cmd1.equals("next")){
+                    cmdN = false;
+                    player2Playing = false;//Check if player 2 can shoot ships
+                    player1Playing = true;//Check if player 1 can shoot ships
+                    System.out.println('\u000C');
+                    playingBoardPlayer1();
+                    shipWeapon();
+                }
             }
-        }else if(placingBoardPlayer1[shootY][shootX] == shipChar[5]){
+        }else if(placingBoardPlayer2[shootY][shootX] == shipChar[5]){
             System.out.println('\u000C');
             playingBoardPlayer2[shootY][shootX] = shipChar[8];
             playingBoardPlayer2();
             System.out.println();
             System.out.println("Type n or next to start player 1's turn");
-            String cmd2 = kb.nextLine();
-            cmd2 = cmd2.toLowerCase();
-            if(cmd2.equals("n") || cmd2.equals("next")){
-                player2Playing = false;//Check if player 2 can shoot ships
-                player1Playing = true;//Check if player 1 can shoot ships
-                System.out.println('\u000C');
-                playingBoardPlayer1();
-                shipWeapon();
+            boolean cmdN = true;
+            while (cmdN){
+                String cmd2 = kb.nextLine();
+                cmd2 = cmd2.toLowerCase();
+                if(cmd2.equals("n") || cmd2.equals("next")){
+                    cmdN = false;
+                    player2Playing = false;//Check if player 1 can shoot ships
+                    player1Playing = true;//Check if player 2 can shoot ships
+                    System.out.println('\u000C');
+                    playingBoardPlayer1();
+                    shipWeapon();
+                }
             }
-        }else{
-            System.out.println('\u000C');
-            playingBoardPlayer2();
-            System.out.println("You cannot shoot here");
         }
     }
     
+    public void sink1Ship(){
+        //check if a ship has been sunk
+        if (placingBoardPlayer2[shootY][shootX] == shipChar[0])s1P1Hit--;if (s1P1Hit == 0)shipP1Sink[0] = 1;
+        if (placingBoardPlayer2[shootY][shootX] == shipChar[1])s2P1Hit--;if (s2P1Hit == 0)shipP1Sink[1] = 1;
+        if (placingBoardPlayer2[shootY][shootX] == shipChar[2])s3P1Hit--;if (s3P1Hit == 0)shipP1Sink[2] = 1;
+        if (placingBoardPlayer2[shootY][shootX] == shipChar[3])s4P1Hit--;if (s4P1Hit == 0)shipP1Sink[3] = 1;
+        if (placingBoardPlayer2[shootY][shootX] == shipChar[4])s5P1Hit--;if (s5P1Hit == 0)shipP1Sink[4] = 1;
+    }
+    
+    public void sink2Ship(){
+        //check if a ship has been sunk
+        if (placingBoardPlayer1[shootY][shootX] == shipChar[0])s1P2Hit--;if (s1P1Hit == 0)shipP2Sink[0] = 1;
+        if (placingBoardPlayer1[shootY][shootX] == shipChar[1])s2P2Hit--;if (s2P1Hit == 0)shipP2Sink[1] = 1;
+        if (placingBoardPlayer1[shootY][shootX] == shipChar[2])s3P2Hit--;if (s3P1Hit == 0)shipP2Sink[2] = 1;
+        if (placingBoardPlayer1[shootY][shootX] == shipChar[3])s4P2Hit--;if (s4P1Hit == 0)shipP2Sink[3] = 1;
+        if (placingBoardPlayer1[shootY][shootX] == shipChar[4])s5P2Hit--;if (s5P1Hit == 0)shipP2Sink[4] = 1;
+    }
+    
     public void winGame(){
+        //tell the player who won the game
         int i = 0;
         if(winConditionP1 == 0)i = 1;
         if(winConditionP2 == 0)i = 2;
-        System.out.println("Player " + i + " has won the game\n");
-        System.out.println("Type r or restart to play again");
-        String cmd0 = kb.nextLine();
-        cmd0 = cmd0.toLowerCase();
-        if(cmd0.equals("r") || cmd0.equals("restart")){
-            placingBoardPlayer1();//Check if player 1 can place ships
-            shipCtrl();//Starts moving the ships
-            shipMove = true;//Allows ships to move
-            shipShoot = false;//Allows ships to move
-            player1PlayingSetup = false;//sets up the player 1 playing board by placing waves where they need to be
-            player2PlayingSetup = false;//sets up the player 2 playing board by placing waves where they need to be
-            player1Placing = true;//Player 1 can place ships
-            player2Placing = false;//Player 2 can place ships
-            player1Playing = false;//Player 1 can shoot ships
-            player2Playing = false;//Player 2 can shoot ships
-            for(int j=0;j<5;j++)shipPosX[i] = 0;
-            for(int j=0;j<5;j++)shipPosY[i] = i;
-            shootX = 0;
-            shootY = 0;
-            shipLengthAdd = 0;//This is used as an index into the ship length array
-            shipLengthPrint = 0;//This is used to check what ships can be printed onto the board
-            shipTurn = 0;//Tells the ship what direction it can turn
-            winConditionP1 = 17;//Tells the game when player 1 has won
-            winConditionP2 = 17;//Tells the game when player 1 has won
-        }
+        for(int i;i<100;i++)System.out.println("Player " + i + " has won the game\n");
     }
 }
