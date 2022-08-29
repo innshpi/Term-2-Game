@@ -75,9 +75,11 @@ public class Term2Project
     boolean canMoveT0 = false;//Tells the ship if it can turn horizontal
     boolean canMoveT1 = false;//Tells the ship if it can turn vertical
     
+    //Tells the game if a ship has been sunk
     int[] shipP1Sink = {0, 0, 0, 0, 0};
     int[] shipP2Sink = {0, 0, 0, 0, 0};
     
+    //Tells the game if a ship has been hit
     int s1P1Hit = 2;
     int s2P1Hit = 3;
     int s3P1Hit = 3;
@@ -90,7 +92,7 @@ public class Term2Project
     int s4P2Hit = 4;
     int s5P2Hit = 5;
     
-    int winConditionP1 = 1;//Tells the game when player 1 has won
+    int winConditionP1 = 17;//Tells the game when player 1 has won
     int winConditionP2 = 17;//Tells the game when player 2 has won
     /**
      * Constructor for objects of class printTest
@@ -141,6 +143,7 @@ public class Term2Project
         System.out.println("PLAYER 1 PLACING");//Tells the players who is placing
         System.out.println();
         System.out.println("Type r,l,u,d or right,left,up,down\nto move a ship and press n to place a ship");
+        System.out.println("PLAYER 2 make sure you look away while PLAYER 1 is placing");
     }
     
     //placingBoardPlayer2 is used to make the board where player 2's ships are placed
@@ -170,6 +173,7 @@ public class Term2Project
         System.out.println("PLAYER 2 PLACING");//Tells the players who is placing
         System.out.println();
         System.out.println("Type r,l,u,d or right,left,up,down\nto move a ship and press n to place a ship");
+        System.out.println("PLAYER 1 make sure you look away while PLAYER 2 is placing");
     }
     
     //playingBoardPlayer1 is used to keep track of what ships have been shot by player 1
@@ -378,48 +382,59 @@ public class Term2Project
         else canMoveT1 = true;
     }
     
-    //shipPlaceCollision is used to check if a ship can be placed
+    //canPlace is used to check if a ship can be placed in a certain position
     public boolean canPlace(){
         boolean canPlace = true;
-        for(int i=0;i<2;i++){
-            //player 1 - ship 1 collisions
-            if (shipLengthPrint==1)for(int j=0;j<3;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
-            //player 2 - ship 1 collisions
-            if (shipLengthPrint==1)for(int j=0;j<3;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+        for(int i=0;i<shipLengthArray[0];i++){
+            if(player1Placing){        
+                //player 1 - ship 1 collisions
+                if (shipLengthPrint==1)for(int j=0;j<shipLengthArray[1];j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==2)for(int j=0;j<shipLengthArray[2];j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==3)for(int j=0;j<shipLengthArray[3];j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship1P1FinalX[i]==shipPosX[j] && ship1P1FinalY[i]==shipPosY[j])canPlace = false;}
+            }    
+            if(player2Placing){       
+                //player 2 - ship 1 collisions
+                if (shipLengthPrint==1)for(int j=0;j<shipLengthArray[1];j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==2)for(int j=0;j<shipLengthArray[2];j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==3)for(int j=0;j<shipLengthArray[3];j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship1P2FinalX[i]==shipPosX[j] && ship1P2FinalY[i]==shipPosY[j])canPlace = false;}
+            }   
         }    
-        for(int i=0;i<3;i++){
-            //player 1 - ship 2 collisions
-            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
-            //player 1 - ship 3 collisions
-            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship3P1FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship3P1FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
-            //player 2 - ship 2 collisions
-            if (shipLengthPrint==2)for(int j=0;j<3;j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
-            //player 2 - ship 3 collisions
-            if (shipLengthPrint==3)for(int j=0;j<4;j++){if(ship3P2FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship3P2FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+        for(int i=0;i<shipLengthArray[2];i++){
+            if(player1Placing){          
+                //player 1 - ship 2 collisions
+                if (shipLengthPrint==2)for(int j=0;j<shipLengthArray[2];j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==3)for(int j=0;j<shipLengthArray[3];j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship2P1FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+                //player 1 - ship 3 collisions
+                if (shipLengthPrint==3)for(int j=0;j<shipLengthArray[3];j++){if(ship3P1FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship3P1FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+            }        
+            if(player2Placing){      
+                //player 2 - ship 2 collisions
+                if (shipLengthPrint==2)for(int j=0;j<shipLengthArray[2];j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==3)for(int j=0;j<shipLengthArray[3];j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship2P2FinalX[i]==shipPosX[j] && ship2P1FinalY[i]==shipPosY[j])canPlace = false;}
+                //player 2 - ship 3 collisions
+                if (shipLengthPrint==3)for(int j=0;j<shipLengthArray[3];j++){if(ship3P2FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship3P2FinalX[i]==shipPosX[j] && ship3P1FinalY[i]==shipPosY[j])canPlace = false;}
+            }
         }
-        for(int i=0;i<4;i++){
-            //player 1 - ship 4 collisions
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship4P1FinalX[i]==shipPosX[j] && ship4P1FinalY[i]==shipPosY[j])canPlace = false;}
-            //player 2 - ship 4 collisions
-            if (shipLengthPrint==4)for(int j=0;j<5;j++){if(ship4P1FinalX[i]==shipPosX[j] && ship4P1FinalY[i]==shipPosY[j])canPlace = false;}
+        for(int i=0;i<shipLengthArray[3];i++){
+            if(player1Placing){  
+                //player 1 - ship 4 collisions
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship4P1FinalX[i]==shipPosX[j] && ship4P1FinalY[i]==shipPosY[j])canPlace = false;}
+            }    
+            if(player1Placing){      
+                //player 2 - ship 4 collisions
+                if (shipLengthPrint==4)for(int j=0;j<shipLengthArray[4];j++){if(ship4P1FinalX[i]==shipPosX[j] && ship4P1FinalY[i]==shipPosY[j])canPlace = false;}
+            }
         }
         return canPlace;
     }
     
-    
-    //shipShoot is used copy the temporary ship positions to the final board configuration
+    //shipWeapon starts the shooting process
     public void shipWeapon(){
         while(shipShoot){
             if(winConditionP1 == 0 || winConditionP2 == 0)winGame();
@@ -458,6 +473,7 @@ public class Term2Project
         }
     }
     
+    //player1Shoot operates player 1's turn to shoot
     public void player1Shoot(){
         System.out.println('\u000C');
         playingBoardPlayer1();
@@ -478,7 +494,6 @@ public class Term2Project
             playingBoardPlayer1();
             System.out.println();
             System.out.println("Type n or next to start player 2's turn");
-            System.out.println(s1P1Hit);
             boolean cmdN = true;
             while (cmdN){
                 String cmd1 = kb.nextLine();
@@ -514,6 +529,7 @@ public class Term2Project
         }
     }
     
+    //player2Shoot operates player 2's turn to shoot
     public void player2Shoot(){
         System.out.println('\u000C');
         playingBoardPlayer2();
@@ -526,11 +542,11 @@ public class Term2Project
             System.out.println('\u000C');
             playingBoardPlayer2[shootY][shootX] = shipChar[7];
             sink2Ship();
-            if(shipP2Sink[0] == 1)for(int i=0;i<shipLengthArray[0];i++)playingBoardPlayer2[ship1P2FinalY[i]][ship1P2FinalX[i]] = shipChar[0];
-            if(shipP2Sink[1] == 1)for(int i=0;i<shipLengthArray[1];i++)playingBoardPlayer2[ship2P2FinalY[i]][ship2P2FinalX[i]] = shipChar[1];
-            if(shipP2Sink[2] == 1)for(int i=0;i<shipLengthArray[2];i++)playingBoardPlayer2[ship3P2FinalY[i]][ship3P2FinalX[i]] = shipChar[2];
-            if(shipP2Sink[3] == 1)for(int i=0;i<shipLengthArray[3];i++)playingBoardPlayer2[ship4P2FinalY[i]][ship4P2FinalX[i]] = shipChar[3];
-            if(shipP2Sink[4] == 1)for(int i=0;i<shipLengthArray[4];i++)playingBoardPlayer2[ship5P2FinalY[i]][ship5P2FinalX[i]] = shipChar[4];
+            if(shipP2Sink[0] == 1)for(int i=0;i<shipLengthArray[0];i++)playingBoardPlayer2[ship1P1FinalY[i]][ship1P1FinalX[i]] = shipChar[0];
+            if(shipP2Sink[1] == 1)for(int i=0;i<shipLengthArray[1];i++)playingBoardPlayer2[ship2P1FinalY[i]][ship2P1FinalX[i]] = shipChar[1];
+            if(shipP2Sink[2] == 1)for(int i=0;i<shipLengthArray[2];i++)playingBoardPlayer2[ship3P1FinalY[i]][ship3P1FinalX[i]] = shipChar[2];
+            if(shipP2Sink[3] == 1)for(int i=0;i<shipLengthArray[3];i++)playingBoardPlayer2[ship4P1FinalY[i]][ship4P1FinalX[i]] = shipChar[3];
+            if(shipP2Sink[4] == 1)for(int i=0;i<shipLengthArray[4];i++)playingBoardPlayer2[ship5P1FinalY[i]][ship5P1FinalX[i]] = shipChar[4];
             playingBoardPlayer2();
             System.out.println();
             System.out.println("Type n or next to start player 1's turn");
@@ -547,7 +563,7 @@ public class Term2Project
                     shipWeapon();
                 }
             }
-        }else if(placingBoardPlayer2[shootY][shootX] == shipChar[5]){
+        }else if(placingBoardPlayer1[shootY][shootX] == shipChar[5]){
             System.out.println('\u000C');
             playingBoardPlayer2[shootY][shootX] = shipChar[8];
             playingBoardPlayer2();
@@ -559,8 +575,8 @@ public class Term2Project
                 cmd2 = cmd2.toLowerCase();
                 if(cmd2.equals("n") || cmd2.equals("next")){
                     cmdN = false;
-                    player2Playing = false;//Check if player 1 can shoot ships
-                    player1Playing = true;//Check if player 2 can shoot ships
+                    player2Playing = false;//Check if player 2 can shoot ships
+                    player1Playing = true;//Check if player 1 can shoot ships
                     System.out.println('\u000C');
                     playingBoardPlayer1();
                     shipWeapon();
@@ -589,9 +605,17 @@ public class Term2Project
     
     public void winGame(){
         //tell the player who won the game
+        player1Placing = false;
+        player2Placing = false;
+        player1Playing = false;
+        player2Playing = false;
+        System.out.println('\u000C');
         int i = 0;
         if(winConditionP1 == 0)i = 1;
         if(winConditionP2 == 0)i = 2;
-        for(int i;i<100;i++)System.out.println("Player " + i + " has won the game\n");
+        System.out.println("Player " + i + " has won the game\n");
+        System.out.println("Please restart the game to play again");
+        kb.close();
+        System.exit(0);
     }
 }
