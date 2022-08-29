@@ -603,8 +603,8 @@ public class Term2Project
         if (placingBoardPlayer1[shootY][shootX] == shipChar[4])s5P2Hit--;if (s5P1Hit == 0)shipP2Sink[4] = 1;
     }
     
+    //tell the player who won the game
     public void winGame(){
-        //tell the player who won the game
         player1Placing = false;
         player2Placing = false;
         player1Playing = false;
